@@ -1,0 +1,5 @@
+* text=auto
+README.txt text eol=crlf
+LICENSE text eol=crlf
+*.ini text eol=crlf
+*.dll binary
