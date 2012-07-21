@@ -42,7 +42,7 @@ public:
      * @brief Build via NSIS
      * @param installer
      */
-    void build(NSIS *installer);
+    void build(NSIS *installer, QString version);
 
     /**
      * @brief Download original installer

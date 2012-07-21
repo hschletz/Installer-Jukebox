@@ -31,8 +31,10 @@ FlashPlayerPlugin::FlashPlayerPlugin() :
 {
 }
 
-void FlashPlayerPlugin::build(NSIS *installer)
+void FlashPlayerPlugin::build(NSIS *installer, QString version)
 {
+    Q_UNUSED(version);
+
     isError = false;
     download();
     if (!isError) {

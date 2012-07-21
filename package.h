@@ -63,13 +63,13 @@ public:
     /**
      * @brief Build the package via the configured installer
      */
-    void build();
+    void build(QString version);
 
     /**
      * @brief Build the package via NSIS
      * @param installer NSIS instance
      */
-    virtual void build(NSIS *installer);
+    virtual void build(NSIS *installer, QString version);
 
     /**
      * @brief Get configured output file to build

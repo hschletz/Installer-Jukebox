@@ -45,9 +45,21 @@ Dialog::~Dialog()
 }
 
 
+void Dialog::on_packageName_currentIndexChanged(const QString &arg1)
+{
+    if (arg1 == "Flash Player ActiveX" || arg1 == "Flash Player Plugin") {
+        ui->version->hide();
+        ui->label_version->hide();
+    } else {
+        ui->version->show();
+        ui->label_version->show();
+    }
+}
+
+
 void Dialog::on_buildButton_clicked()
 {
     QString package(ui->packageName->currentText());
     qDebug() << "Build package:" << package;
-    packages[package]->build();
+    packages[package]->build(ui->version->text());
 }

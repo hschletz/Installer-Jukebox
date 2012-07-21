@@ -56,6 +56,12 @@ public:
 private slots:
 
     /**
+     * @brief Set visibility of version widget depending on selected package
+     * @param arg1 Selected package
+     */
+    void on_packageName_currentIndexChanged(const QString &arg1);
+
+    /**
      * @brief Start building a package according to settings.
      */
     void on_buildButton_clicked();

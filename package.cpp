@@ -73,7 +73,7 @@ QMap<QString, Package *> Package::getPackages()
 }
 
 
-void Package::build()
+void Package::build(QString version)
 {
     if (getOutputFile().isEmpty()) {
         return;
@@ -82,7 +82,7 @@ void Package::build()
     Installer *installer = Installer::getInstaller();
     QString type = installer->metaObject()->className();
     if (type == "NSIS") {
-        build((NSIS *) installer);
+        build((NSIS *) installer, version);
     } else {
         Application::critical(tr("Invalid installer: %1").arg(type));
     }
@@ -90,8 +90,10 @@ void Package::build()
 }
 
 
-void Package::build(NSIS *installer)
+void Package::build(NSIS *installer, QString version)
 {
+    Q_UNUSED(version);
+
     // Default implementation - override to actually build anything
     qDebug() << installer->metaObject()->className() << "not implemented for this package";
     Application::critical(tr("No NSIS installer available for this package."));

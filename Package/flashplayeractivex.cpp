@@ -32,8 +32,10 @@ FlashPlayerActiveX::FlashPlayerActiveX() :
 }
 
 
-void FlashPlayerActiveX::build(NSIS *installer)
+void FlashPlayerActiveX::build(NSIS *installer, QString version)
 {
+    Q_UNUSED(version);
+
     isError = false;
     download();
     if (!isError) {
