@@ -97,12 +97,17 @@ QString Downloader::get(QString url, QString targetDir, QString filename, QStrin
 
     // Download the file
     Downloader downloader(url, target, userAgent);
-    return downloader.download();
+    return downloader.download(10);
 }
 
 
-QString Downloader::download()
+QString Downloader::download(int maxRedirects)
 {
+    if (maxRedirects < 0) {
+        Application::critical(tr("Download aborted: too many HTTP redirects."));
+        return QString();
+    }
+
     file = new QFile(target);
     if(!file->open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
@@ -129,6 +134,11 @@ QString Downloader::download()
 
     if (downloadComplete) {
         return target;
+    } else if (redirectUrl.isValid()) {
+        qDebug() << "Redirected to" << redirectUrl.toString();
+        qDebug() << maxRedirects << "redirects left.";
+        Downloader downloader(redirectUrl.toString(), target, userAgent);
+        return downloader.download(maxRedirects - 1);
     } else {
         return QString();
     }
@@ -148,11 +158,12 @@ void Downloader::finish()
     } else {
         receive(); // Ensure no outstanding data
         file->close();
+        redirectUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
         if(reply->error())
         {
             qDebug() << "Download error.";
             Application::critical(tr("Download failed: %1").arg(reply->errorString()));
-        } else {
+        } else if (redirectUrl.isNull()) {
             qDebug() << "Download complete," << (file->size() >> 10) << "KiB.";
             downloadComplete = true;
         }

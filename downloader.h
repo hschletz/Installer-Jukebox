@@ -32,6 +32,7 @@
 #include <QProgressDialog>
 #include <QString>
 #include <QTime>
+#include <QVariant>
 
 /**
  * @brief A class that downloads files, showing a progress bar
@@ -51,6 +52,7 @@ public:
      * instead.
      * @param url
      * @param target
+     * @param userAgent
      */
     explicit Downloader(QString url, QString target, QString userAgent);
 
@@ -75,9 +77,10 @@ public:
 
     /**
      * @brief Download a file (internal method)
+     * @param maxRedirects Maximum number of HTTP redirects before download gets aborted.
      * @return QString Full path of downloaded file, or empty on error/abort
      */
-    QString download();
+    QString download(int maxRedirects);
 
 public slots:
 
@@ -159,6 +162,11 @@ private:
      * @brief Flag to indicate download success
      */
     bool downloadComplete;
+
+    /**
+     * @brief Redirection target (if any)
+     */
+    QVariant redirectUrl;
 };
 
 #endif // DOWNLOADER_H
