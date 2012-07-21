@@ -52,7 +52,7 @@ public:
      * @param url
      * @param target
      */
-    explicit Downloader(QString url, QString target);
+    explicit Downloader(QString url, QString target, QString userAgent);
 
     /**
      * @brief Destructor
@@ -68,9 +68,10 @@ public:
      * @param url URL to download
      * @param targetDir Directory to store downloaded file. If empty, returns immediately
      * @param filename Name for downloaded file. If empty, filename is extracted from URL.
+     * @param userAgent User-Agent header to use. If empty, QNetworkRequest's default is used.
      * @return QString Full path of downloaded file, or empty on error
      */
-    static QString get(QString url, QString targetDir, QString filename="");
+    static QString get(QString url, QString targetDir, QString filename="", QString userAgent="");
 
     /**
      * @brief Download a file (internal method)
@@ -113,6 +114,11 @@ private:
      * @brief Full path to target file
      */
     QString target;
+
+    /**
+     * @brief User agent to sent in HTTP request
+     */
+    QString userAgent;
 
     /**
      * @brief Progress dialog

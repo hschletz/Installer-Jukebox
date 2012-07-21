@@ -31,10 +31,11 @@
 #include "application.h"
 #include "downloader.h"
 
-Downloader::Downloader(QString url, QString target) :
+Downloader::Downloader(QString url, QString target, QString userAgent) :
     QObject(0),
     url(url),
     target(target),
+    userAgent(userAgent),
     progressLabel(tr("Downloading %1 (%2 KiB/s)"))
 {
     dialog = new QProgressDialog(0);
@@ -51,7 +52,7 @@ Downloader::~Downloader()
 }
 
 
-QString Downloader::get(QString url, QString targetDir, QString filename)
+QString Downloader::get(QString url, QString targetDir, QString filename, QString userAgent)
 {
     if (targetDir.isEmpty()) {
         return QString();
@@ -95,7 +96,7 @@ QString Downloader::get(QString url, QString targetDir, QString filename)
     }
 
     // Download the file
-    Downloader downloader(url, target);
+    Downloader downloader(url, target, userAgent);
     return downloader.download();
 }
 
@@ -116,7 +117,9 @@ QString Downloader::download()
     downloadComplete = false;
     startTime = QTime::currentTime();
 
-    reply = net.get(QNetworkRequest(url));
+    QNetworkRequest request(url);
+    request.setRawHeader("User-Agent", userAgent.toAscii());
+    reply = net.get(request);
     connect(reply, SIGNAL(finished()), this, SLOT(finish()));
     connect(reply, SIGNAL(readyRead()), this, SLOT(receive()));
     connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(update(qint64, qint64)));
