@@ -1,0 +1,8 @@
+InstallerJukebox
+InstallerJukebox.ini
+InstallerJukebox.pro.user
+Makefile*
+apidoc/
+debug/
+release/
+ui_*.h

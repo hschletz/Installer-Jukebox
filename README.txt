@@ -1,0 +1,79 @@
+The Installer Jukebox
+=====================
+
+What is it?
+
+The Installer Jukebox generates fully automated and customized installers for
+several Windows applications, suitable for automatic and unattended deployment.
+Supported packages are:
+
+- Flash Player ActiveX
+- Flash Player Plugin
+
+
+Requirements
+
+- Qt SDK (http://qt-project.org) for compiling the application
+- NSIS (http://nsis.sourceforge.net) for generating installers
+
+While the generated installers are only useful in a Windows environment, the
+Installer Jukebox itself can run under any OS supported by Qt and NSIS -
+Windows, Linux and MacOS.
+
+
+Compiling
+
+Change to the Installer Jukebox source directory and run:
+
+    qmake
+    make release
+
+That's it! This will generate the InstallerJukebox either in the same directory
+or under release/, depending on the environment. It can be moved to any
+location.
+
+If you have Qt Creator installed, you can also use that to open
+InstallerJukebox.pro and build and run the application from there.
+
+
+Configuration
+
+The application needs a configuration file "InstallerJukebox.ini" in the same
+directory as the executable file. A template file
+"InstallerJukebox.template.ini" is provided - rename or copy it to
+"InstallerJukebox.ini". Open that file in an editor and follow the instructions
+in the file.
+
+
+Generating installers
+
+Start the application, select the package and click "Build". If everything went
+fine, you now have a customized installer in the configured location.
+
+
+Running the installer
+
+Just start the installer like any other installer. It will only show an an page
+and then perform the installation without further questions, according to your
+configuration.
+For fully automated, non-interactive installations start the installer from the
+command line with the /S switch:
+
+    install-MyPackage.exe /S
+
+You won't see any activity at a first glance - the installer will run completely
+hidden and terminate itself once it's finished.
+
+
+
+License
+
+The Installer Jukebox is released under a revised BSD license. You can find the
+full license in
+the LICENSE file in the same directory that contains this file.
+
+
+Third party code
+
+The installer Jukebox contains a bundled copy of the nsProcess plugin v1.6
+(http://nsis.sourceforge.net/NsProcess_plugin).

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/NSIS">
+        <file>main.nsi</file>
+        <file>FlashPlayerActiveX/main.nsh</file>
+        <file>FlashPlayerPlugin/main.nsh</file>
+        <file>plugins/nsProcess.dll</file>
+    </qresource>
+</RCC>
