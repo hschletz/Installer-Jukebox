@@ -38,10 +38,6 @@ public:
      */
     FlashPlayerActiveX();
 
-    /**
-     * @brief Build via NSIS
-     * @param installer
-     */
     void build(NSIS *installer, QString version);
 
     /**

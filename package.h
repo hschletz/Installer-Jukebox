@@ -66,8 +66,9 @@ public:
     void build(QString version);
 
     /**
-     * @brief Build the package via NSIS
+     * @brief Build the package via %NSIS
      * @param installer NSIS instance
+     * @param version Requested version
      */
     virtual void build(NSIS *installer, QString version);
 
