@@ -24,49 +24,32 @@
  */
 #include <QDateTime>
 #include <QDebug>
-#include <QFile>
 #include <QFileInfo>
 #include <QNetworkRequest>
 #include <QProgressBar>
 #include "application.h"
 #include "downloader.h"
 
-Downloader::Downloader(QString url, QString target, QString userAgent) :
+
+Downloader::Downloader(QString sourceUrl, QString targetDir, QString filename, QString userAgent) :
     QObject(0),
-    url(url),
-    target(target),
     userAgent(userAgent),
+    dialog(NULL),
     progressLabel(tr("Downloading %1 (%2 KiB/s)"))
 {
-    dialog = new QProgressDialog(0);
-    QProgressBar *bar = new QProgressBar(dialog);
-    bar->setFormat("%v/%m KiB");
-    dialog->setBar(bar);
-}
-
-
-Downloader::~Downloader()
-{
-    delete dialog;
-    // Don't delete bar - this is handled by dialog
-}
-
-
-QString Downloader::get(QString url, QString targetDir, QString filename, QString userAgent)
-{
     if (targetDir.isEmpty()) {
-        return QString();
+        return;
     }
 
-    qDebug() << "Download:" << url;
+    qDebug() << "Download:" << sourceUrl;
 
     // Extract filename from URL if necessary
     if (filename.isEmpty()) {
-        filename = QFileInfo(url).fileName();
+        filename = QFileInfo(sourceUrl).fileName();
     }
 
     // Compose target path
-    QString target = targetDir + "/" + filename;
+    target = targetDir + "/" + filename;
     qDebug() << "Target:" << target;
 
     // Show confirmation dialog if target exists
@@ -85,29 +68,63 @@ QString Downloader::get(QString url, QString targetDir, QString filename, QStrin
                ) {
         case QMessageBox::Yes:
             qDebug() << "Re-download.";
+            // url and target non-empty
             break;
         case QMessageBox::No:
             qDebug() << "Reuse file.";
-            return target;
+            // url empty, target non-empty
+            return;
         default: // Cancel
             qDebug() << "Aborted.";
-            return QString();
+            // url and target empty;
+            target.clear();
+            return;
         }
     }
+    url = sourceUrl;
+}
 
-    // Download the file
-    Downloader downloader(url, target, userAgent);
-    return downloader.download(10);
+
+Downloader::Downloader(QString url, QString target, QString userAgent) :
+    QObject(0),
+    url(url),
+    target(target),
+    userAgent(userAgent),
+    dialog(NULL),
+    progressLabel(tr("Downloading %1 (%2 KiB/s)"))
+{
+}
+
+
+Downloader::~Downloader()
+{
+    if (dialog) {
+        delete dialog;
+    }
+}
+
+
+QString Downloader::get(QString sourceUrl, QString targetDir, QString filename, QString userAgent)
+{
+    Downloader downloader(sourceUrl, targetDir, filename, userAgent);
+    return downloader.getFile();
+}
+
+
+QString Downloader::getFile()
+{
+    if (target.isEmpty()) {
+        return QString();
+    } else if (url.isEmpty()) {
+        return target;
+    } else {
+        return download(10);
+    }
 }
 
 
 QString Downloader::download(int maxRedirects)
 {
-    if (maxRedirects < 0) {
-        Application::critical(tr("Download aborted: too many HTTP redirects."));
-        return QString();
-    }
-
     file = new QFile(target);
     if(!file->open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
@@ -117,6 +134,11 @@ QString Downloader::download(int maxRedirects)
         file = NULL;
         return QString();
     }
+
+    dialog = new QProgressDialog;
+    QProgressBar *bar = new QProgressBar(dialog);
+    bar->setFormat("%v/%m KiB");
+    dialog->setBar(bar); // Will also delete bar together with dialog
 
     downloadAborted = false;
     downloadComplete = false;
@@ -135,13 +157,32 @@ QString Downloader::download(int maxRedirects)
     if (downloadComplete) {
         return target;
     } else if (redirectUrl.isValid()) {
-        qDebug() << "Redirected to" << redirectUrl.toString();
-        qDebug() << maxRedirects << "redirects left.";
-        Downloader downloader(redirectUrl.toString(), target, userAgent);
-        return downloader.download(maxRedirects - 1);
+        return redirectFiltered(redirectUrl.toString(), maxRedirects);
     } else {
         return QString();
     }
+}
+
+
+QString Downloader::redirectFiltered(QString redirectUrl, int maxRedirects)
+{
+    if (maxRedirects > 0) {
+        maxRedirects--;
+        qDebug() << "Redirected to" << redirectUrl;
+        qDebug() << maxRedirects << "redirects left.";
+        return redirect(redirectUrl, maxRedirects);
+    } else {
+        qDebug() << "Download error: Redirect limit exceeded!";
+        Application::critical(tr("Download aborted: too many HTTP redirects."));
+        return QString();
+    }
+}
+
+
+QString Downloader::redirect(QString redirectUrl, int maxRedirects)
+{
+    Downloader downloader(redirectUrl, target, userAgent);
+    return downloader.download(maxRedirects);
 }
 
 

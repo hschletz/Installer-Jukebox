@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     Package/flashplayeractivex.cpp \
     downloader.cpp \
     application.cpp \
-    command.cpp
+    command.cpp \
+    Downloader/sourceforge.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -31,7 +32,8 @@ HEADERS  += dialog.h \
     Package/flashplayeractivex.h \
     downloader.h \
     application.h \
-    command.h
+    command.h \
+    Downloader/sourceforge.h
 
 FORMS    += dialog.ui \
     command.ui

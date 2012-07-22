@@ -46,10 +46,22 @@ class Downloader : public QObject
 public:
 
     /**
-     * @brief Constructor
+     * @brief Constructs downloader, generating target path
      *
-     * It is not recommended to instantiate an object directly. Use get()
-     * instead.
+     * This constructor generates the download target from targetDir and
+     * filename. If the target exists, the user is prompted for appropriate
+     * action. See get() for description of arguments.
+     * @param sourceUrl
+     * @param targetDir
+     * @param filename
+     * @param userAgent
+     */
+    Downloader(QString sourceUrl, QString targetDir, QString filename, QString userAgent);
+
+    /**
+     * @brief Constructs downloader with already known target path
+     *
+     * The target is overwritten unconditinally without prompting the user.
      * @param url
      * @param target
      * @param userAgent
@@ -59,7 +71,7 @@ public:
     /**
      * @brief Destructor
      */
-    ~Downloader();
+    virtual ~Downloader();
 
     /**
      * @brief Download a file (recommended method)
@@ -67,13 +79,21 @@ public:
      * Arguments are assumed to be valid - validate before calling this!
      * If the target file already exists, a confirmation dialog is displayed.
      *
-     * @param url URL to download
-     * @param targetDir Directory to store downloaded file. If empty, returns immediately
+     * @param sourceUrl URL to download
+     * @param targetDir Directory to store downloaded file. If empty, download aborts immediately
      * @param filename Name for downloaded file. If empty, filename is extracted from URL.
      * @param userAgent User-Agent header to use. If empty, QNetworkRequest's default is used.
      * @return QString Full path of downloaded file, or empty on error
      */
-    static QString get(QString url, QString targetDir, QString filename="", QString userAgent="");
+    static QString get(QString sourceUrl, QString targetDir, QString filename="", QString userAgent="");
+
+    /**
+     * @brief Initiate download
+     *
+     * This checks url and target and initiates the download if necessary.
+     * @return QString Full path of downloaded file, or empty on error/abort
+     */
+    QString getFile();
 
     /**
      * @brief Download a file (internal method)
@@ -106,7 +126,31 @@ public slots:
      */
     void cancel();
 
-private:
+protected:
+
+    /**
+     * @brief Handle redirects with filter
+     *
+     * This method is called whenever a redirect is detected. The default
+     * implementation redirects unconditionally unless maxRedirects is 0 or
+     * less. Subclasses can override this with extra checks or modification on
+     * the URL.
+     * @param redirectUrl Redirect target
+     * @param maxRedirects Maximum redirects left
+     * @return QString Full path of downloaded file, or empty on error/abort
+     */
+    virtual QString redirectFiltered(QString redirectUrl, int maxRedirects);
+
+    /**
+     * @brief Perform redirects unconditionally
+     *
+     * This is called by redirectFiltered() to perform the actual redirect.
+     * Subclasses can override this to instantiate their own class.
+     * @param redirectUrl Redirect target
+     * @param maxRedirects Maximum redirects left
+     * @return QString Full path of downloaded file, or empty on error/abort
+     */
+    virtual QString redirect(QString redirectUrl, int maxRedirects);
 
     /**
      * @brief URL
@@ -122,6 +166,8 @@ private:
      * @brief User agent to sent in HTTP request
      */
     QString userAgent;
+
+private:
 
     /**
      * @brief Progress dialog
@@ -167,6 +213,7 @@ private:
      * @brief Redirection target (if any)
      */
     QVariant redirectUrl;
+
 };
 
 #endif // DOWNLOADER_H
