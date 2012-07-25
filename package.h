@@ -48,7 +48,7 @@ public:
      * @brief Constructor
      * @param name %Package name, can later be queried via className()
      */
-    explicit Package(const char *name);
+    explicit Package(const char *name, const char *minVersion=0);
 
     /**
      * @brief Destructor
@@ -72,7 +72,7 @@ public:
      * version gets downloaded automatically.
      * @return Version
      */
-    virtual Version getMinVersion();
+    Version getMinVersion();
 
     /**
      * @brief Build the package via the configured installer
@@ -132,5 +132,10 @@ protected:
      * @brief Error flag
      */
     bool isError;
+
+    /**
+     * @brief Minimum supported version
+     */
+    Version minVersion;
 };
 #endif // PACKAGE_H

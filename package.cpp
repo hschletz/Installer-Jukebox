@@ -32,8 +32,9 @@
 #include "Package/flashplayerplugin.h"
 #include "Package/flashplayeractivex.h"
 
-Package::Package(const char *name) :
-    QObject(0)
+Package::Package(const char *name, const char *minVersion) :
+    QObject(0),
+    minVersion(minVersion)
 {
     setObjectName(name);
 }
@@ -75,7 +76,7 @@ QMap<QString, Package *> Package::getPackages()
 
 Version Package::getMinVersion()
 {
-    return Version();
+    return minVersion;
 }
 
 
