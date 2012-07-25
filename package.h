@@ -84,7 +84,7 @@ public:
      * @param installer NSIS instance
      * @param version Requested version
      */
-    virtual void build(NSIS *installer, QString version);
+    virtual void build(NSIS *installer, Version version);
 
     /**
      * @brief Get configured output file to build

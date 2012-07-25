@@ -96,7 +96,7 @@ void Package::build(QString version)
 }
 
 
-void Package::build(NSIS *installer, QString version)
+void Package::build(NSIS *installer, Version version)
 {
     Q_UNUSED(version);
 

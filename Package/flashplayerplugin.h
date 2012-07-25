@@ -38,7 +38,7 @@ public:
      */
     FlashPlayerPlugin();
 
-    void build(NSIS *installer, QString version);
+    void build(NSIS *installer, Version version);
 
     /**
      * @brief Download original installer

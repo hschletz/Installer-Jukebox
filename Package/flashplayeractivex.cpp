@@ -32,7 +32,7 @@ FlashPlayerActiveX::FlashPlayerActiveX() :
 }
 
 
-void FlashPlayerActiveX::build(NSIS *installer, QString version)
+void FlashPlayerActiveX::build(NSIS *installer, Version version)
 {
     Q_UNUSED(version);
 
