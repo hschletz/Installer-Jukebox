@@ -22,46 +22,36 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include <QDebug>
-#include "dialog.h"
-#include "package.h"
-#include "ui_dialog.h"
 
-Dialog::Dialog() :
-    QDialog(0),
-    ui(new Ui::Dialog)
+#ifndef VERSION_H
+#define VERSION_H
+
+#include <QString>
+#include <QVariant>
+
+/**
+ * @brief A class representing a version number ("1.2.3" etc.)
+ */
+class Version : public QVariant
 {
-    packages = Package::getPackages();
 
-    ui->setupUi(this);
+public:
 
-    ui->packageName->addItems(packages.keys());
-}
+    /**
+     * @brief Construct an empty version object
+     */
+    Version();
 
+    /**
+     * @brief Construct version object from a string
+     * @param versionString
+     */
+    Version(QString versionString);
 
-Dialog::~Dialog()
-{
-    delete ui;
-}
+    /**
+     * @brief Convert to string
+     */
+    operator QString();
+};
 
-
-void Dialog::on_packageName_currentIndexChanged(const QString &arg1)
-{
-    Version minVersion = packages[arg1]->getMinVersion();
-    if (minVersion.isNull()) {
-        ui->version->hide();
-        ui->label_version->hide();
-    } else {
-        ui->version->show();
-        ui->label_version->setText(tr("Version (%1 or later)").arg(minVersion));
-        ui->label_version->show();
-    }
-}
-
-
-void Dialog::on_buildButton_clicked()
-{
-    QString package(ui->packageName->currentText());
-    qDebug() << "Build package:" << package;
-    packages[package]->build(ui->version->text());
-}
+#endif // VERSION_H

@@ -73,6 +73,12 @@ QMap<QString, Package *> Package::getPackages()
 }
 
 
+Version Package::getMinVersion()
+{
+    return Version();
+}
+
+
 void Package::build(QString version)
 {
     if (getOutputFile().isEmpty()) {

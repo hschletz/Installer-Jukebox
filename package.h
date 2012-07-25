@@ -29,6 +29,7 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include "version.h"
 #include "Installer/nsis.h"
 
 /**
@@ -59,6 +60,19 @@ public:
      * @return QMap<QString, Package *>
      */
     static QMap<QString, Package *> getPackages();
+
+    /**
+     * @brief Get minimum supported version
+     *
+     * Gets the minimum software version supported by the package class. Older
+     * versions might work or not, but are untested and not officially
+     * supported.
+     *
+     * The default implementation returns no version, meaning that the latest
+     * version gets downloaded automatically.
+     * @return Version
+     */
+    virtual Version getMinVersion();
 
     /**
      * @brief Build the package via the configured installer

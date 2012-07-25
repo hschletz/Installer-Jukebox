@@ -22,46 +22,22 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include <QDebug>
-#include "dialog.h"
-#include "package.h"
-#include "ui_dialog.h"
 
-Dialog::Dialog() :
-    QDialog(0),
-    ui(new Ui::Dialog)
+#include "version.h"
+
+Version::Version() :
+    QVariant()
 {
-    packages = Package::getPackages();
-
-    ui->setupUi(this);
-
-    ui->packageName->addItems(packages.keys());
 }
 
 
-Dialog::~Dialog()
+Version::Version(QString versionString) :
+    QVariant(versionString)
 {
-    delete ui;
 }
 
 
-void Dialog::on_packageName_currentIndexChanged(const QString &arg1)
+Version::operator QString()
 {
-    Version minVersion = packages[arg1]->getMinVersion();
-    if (minVersion.isNull()) {
-        ui->version->hide();
-        ui->label_version->hide();
-    } else {
-        ui->version->show();
-        ui->label_version->setText(tr("Version (%1 or later)").arg(minVersion));
-        ui->label_version->show();
-    }
-}
-
-
-void Dialog::on_buildButton_clicked()
-{
-    QString package(ui->packageName->currentText());
-    qDebug() << "Build package:" << package;
-    packages[package]->build(ui->version->text());
+    return toString();
 }

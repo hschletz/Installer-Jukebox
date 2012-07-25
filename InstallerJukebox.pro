@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     downloader.cpp \
     application.cpp \
     command.cpp \
-    Downloader/sourceforge.cpp
+    Downloader/sourceforge.cpp \
+    version.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -33,7 +34,8 @@ HEADERS  += dialog.h \
     downloader.h \
     application.h \
     command.h \
-    Downloader/sourceforge.h
+    Downloader/sourceforge.h \
+    version.h
 
 FORMS    += dialog.ui \
     command.ui
