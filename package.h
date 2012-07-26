@@ -47,6 +47,7 @@ public:
     /**
      * @brief Constructor
      * @param name %Package name, can later be queried via className()
+     * @param %minVersion Minimum supported version (optional)
      */
     explicit Package(const char *name, const char *minVersion=0);
 
