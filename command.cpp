@@ -76,7 +76,7 @@ void Command::passInput()
 
 void Command::printStdOut()
 {
-    ui->output->appendPlainText(process.readAllStandardOutput());
+    ui->output->appendPlainText(QString::fromUtf8(process.readAllStandardOutput()));
 }
 
 
