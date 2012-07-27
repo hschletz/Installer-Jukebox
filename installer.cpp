@@ -45,3 +45,9 @@ Installer *Installer::getInstaller()
     qDebug() << "Build with NSIS";
     return new NSIS();
 }
+
+
+void Installer::addPreprocessCommand(Command::cmdSpec cmdSpec)
+{
+    command->commands << cmdSpec;
+}

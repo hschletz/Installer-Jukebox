@@ -56,20 +56,29 @@ bool Command::hasErrors()
 
 
 int Command::exec() {
-    if (command.isEmpty()) {
+    if (commands.isEmpty()) {
         isError = true; // command must be set up before calling this!
     } else {
         isError = false;
-        qDebug() << "Running command:" << command + " " + args.join(" ");
-        process.start(command, args);
+        runCommand();
     }
     return QDialog::exec();
 }
 
 
+void Command::runCommand()
+{
+    if (!commands.isEmpty()) {
+        currentCommand = commands.dequeue();
+        setWindowTitle(currentCommand.program);
+        qDebug() << "Running command:" << currentCommand.program + " " + currentCommand.args.join(" ");
+        process.start(currentCommand.program, currentCommand.args);
+    }
+}
+
 void Command::passInput()
 {
-    QTextStream(&process) << input;
+    QTextStream(&process) << currentCommand.input;
     process.closeWriteChannel(); // Required for some commands to know then to terminate
 }
 
@@ -85,19 +94,31 @@ void Command::finish(int exitCode, QProcess::ExitStatus exitStatus)
     qDebug() << "Command finished. Status:" << exitStatus << "Code:" << exitCode;
     if (exitStatus == QProcess::CrashExit) {
         isError = true;
-        Application::critical(tr("%1 crashed!").arg(command));
+        Application::critical(tr("'%1' crashed!").arg(currentCommand.program));
     } else if (exitCode != 0) {
         isError = true;
-        Application::critical(tr("%1 returned with exit code %2").arg(command).arg(exitCode));
-    } else if (!successMessage.isEmpty()){
-        Application::information(successMessage);
+        Application::critical(tr("'%1'' returned with exit code %2").arg(currentCommand.program).arg(exitCode));
     }
 
-    // Close dialog if there is no output, turn "Cancel" into "Close" otherwise
-    if (ui->output->toPlainText().isEmpty()) {
-        close();
+    if (commands.isEmpty()) {
+        // No more commands in the queue, perform final actions
+        if (!successMessage.isEmpty()){
+            Application::information(successMessage);
+        }
+        // Close dialog if there is no output, turn "Cancel" into "Close" otherwise
+        if (ui->output->toPlainText().isEmpty()) {
+            close();
+        } else {
+            ui->button->setText(tr("Close"));
+        }
     } else {
-        ui->button->setText(tr("Close"));
+        if (isError) {
+            // Flush the queue in case this instance is reused
+            commands.clear();
+        } else {
+            // Run next command
+            runCommand();
+        }
     }
 }
 
@@ -106,7 +127,7 @@ void Command::handleError(QProcess::ProcessError error)
 {
     isError = true;
     qDebug() << "Process error:" << error;
-    Application::critical(tr("Starting %1 failed with error %2.").arg(command).arg(error));
+    Application::critical(tr("Starting '%1' failed with error %2.").arg(currentCommand.program).arg(error));
 }
 
 

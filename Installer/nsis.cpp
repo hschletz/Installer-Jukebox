@@ -32,7 +32,6 @@
 NSIS::NSIS() :
     Installer()
 {
-    command->setWindowTitle(tr("makensis"));
 }
 
 
@@ -138,10 +137,11 @@ bool NSIS::build(
     }
 
     // Run makensis on generated script
-    command->command = Application::getConfig("installer_NSIS/makensis", "makensis").toString();
-    command->args << "-V2"; // display only warnings and errors
-    command->args << "-"; // Get source from STDIN
-    command->input = source;
+    command->commands << Command::cmdSpec(
+                             Application::getConfig("installer_NSIS/makensis", "makensis").toString(),
+                             QStringList() << "-V2" <<"-", // display only warnings and errors, get source from STDIN
+                             source
+                             );
     command->successMessage = tr("The installer has been built successfully. "
                                  "It can be found at '%1'").arg(outputFile);
     command->exec();

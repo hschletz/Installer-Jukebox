@@ -27,6 +27,7 @@
 
 #include <QDialog>
 #include <QProcess>
+#include <QQueue>
 #include <QString>
 #include <QStringList>
 
@@ -37,16 +38,43 @@ class Command;
 /**
  * @brief %Command execution dialog
  *
- * This is a modal dialog that executes a command and displays its output. It
- * also provides a "Cancel" buton to terminate the command if possible.
- * Set the command, args, input and successMessage members and call the exec()
- * slot to use it.
+ * This is a modal dialog that executes one or more commands and displays the
+ * output. It also provides a "Cancel" button to terminate the command if
+ * possible.
+ *
+ * Commands are queued in the "commands" member variable. Populate this with one
+ * or more cmdSpec entries and call the exec() slot to start execution. The
+ * commands are executed in order. Execution is aborted on the first error or if
+ * the user cancels the running command.
+ *
+ * If all commands ran without error, the optional successMessage is displayed.
  */
 class Command : public QDialog
 {
     Q_OBJECT
 
 public:
+
+    /**
+     * @brief Specification for a single command
+     */
+    struct cmdSpec {
+        /**
+         * @brief Constructor
+         * @param program
+         * @param args
+         * @param input
+         */
+        cmdSpec(QString program=QString(), QStringList args=QStringList(), QString input=QString()) :
+            program(program),
+            args(args),
+            input(input)
+        {
+        }
+        QString program; /**< The name of the file to execute */
+        QStringList args; /**< %Command line arguments */
+        QString input; /**< Data to pass to the running command via STDIN */
+    };
 
     /**
      * @brief Default constructor
@@ -67,19 +95,9 @@ public:
     bool hasErrors();
 
     /**
-     * @brief The name of the file to execute
+     * @brief %Command queue
      */
-    QString command;
-
-    /**
-     * @brief %Command line arguments
-     */
-    QStringList args;
-
-    /**
-     * @brief Data to pass to the running command via STDIN
-     */
-    QString input;
+    QQueue<cmdSpec> commands;
 
     /**
      * @brief Message to display on success
@@ -128,9 +146,19 @@ private slots:
 private:
 
     /**
+     * @brief Run next command in the queue (if there is one)
+     */
+    void runCommand();
+
+    /**
      * @brief UI elements
      */
     Ui::Command *ui;
+
+    /**
+     * @brief Currently executing command
+     */
+    cmdSpec currentCommand;
 
     /**
      * @brief Process object

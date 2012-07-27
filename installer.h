@@ -56,6 +56,12 @@ public:
      */
     static Installer *getInstaller();
 
+    /**
+     * @brief Add a command to execute before building the package
+     * @param cmdSpec %Command specification
+     */
+    void addPreprocessCommand(Command::cmdSpec cmdSpec);
+
 protected:
 
     /**
