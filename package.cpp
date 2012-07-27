@@ -29,6 +29,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include "application.h"
+#include "command.h"
 #include "installer.h"
 #include "package.h"
 #include "Package/flashplayerplugin.h"
@@ -211,4 +212,29 @@ bool Package::rmPath(QString path)
         Application::critical(tr("Could not delete '%1'. Aborting").arg(path));
     }
     return success;
+}
+
+
+bool Package::extract7zArchive(QString archive)
+{
+    QString program = Application::getConfig("7z extraction command", "7z").toString();
+    QString args = Application::getConfig("7z extraction args", "x -o%TARGETDIR% %ARCHIVE%").toString();
+    qDebug() << "7z extraction command:" << program + " " + args;
+
+    if (!args.contains("%TARGETDIR%") || !args.contains("%ARCHIVE%")) {
+        Application::critical(tr("Invalid 7z extraction arguments: '%1'").arg(args));
+        return false;
+    }
+
+    Command::cmdSpec cmdSpec;
+    cmdSpec.program = program;
+    cmdSpec.args = args.split(" ", QString::SkipEmptyParts);
+    cmdSpec.args.replaceInStrings("%TARGETDIR%", Application::getTmpDir());
+    cmdSpec.args.replaceInStrings("%ARCHIVE%", archive);
+
+    Command command;
+    command.commands << cmdSpec;
+    command.closeOnSuccess = true;
+    command.exec();
+    return !command.hasErrors();
 }

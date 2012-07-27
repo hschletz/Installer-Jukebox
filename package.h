@@ -128,6 +128,16 @@ protected:
     bool rmPath(QString path);
 
     /**
+     * @brief Extract a 7z archive to the working directory
+     *
+     * This requires an external command which is configured through the global
+     * "7z extraction command" and "7z extraction args" options.
+     * @param archive Archive file
+     * @return bool Success
+     */
+    bool extract7zArchive(QString archive);
+
+    /**
      * @brief List of temporary files
      *
      * Every temporary file generated during the package building process (by
