@@ -104,6 +104,11 @@ public:
      */
     QString successMessage;
 
+    /**
+     * @brief Always close the dialog on success, even with output present
+     */
+    bool closeOnSuccess;
+
 public slots:
 
     /**

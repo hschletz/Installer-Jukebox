@@ -30,6 +30,7 @@
 
 Command::Command(QWidget *parent) :
     QDialog(parent),
+    closeOnSuccess(false),
     ui(new Ui::Command)
 {
     ui->setupUi(this);
@@ -105,8 +106,8 @@ void Command::finish(int exitCode, QProcess::ExitStatus exitStatus)
         if (!successMessage.isEmpty()){
             Application::information(successMessage);
         }
-        // Close dialog if there is no output, turn "Cancel" into "Close" otherwise
-        if (ui->output->toPlainText().isEmpty()) {
+        // Close dialog if requested or there is no output, turn "Cancel" into "Close" otherwise
+        if (ui->output->toPlainText().isEmpty() || (!isError && closeOnSuccess)) {
             close();
         } else {
             ui->button->setText(tr("Close"));
