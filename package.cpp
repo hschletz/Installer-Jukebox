@@ -25,6 +25,8 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
+#include <QDirIterator>
+#include <QFile>
 #include <QFileInfo>
 #include "application.h"
 #include "installer.h"
@@ -178,8 +180,35 @@ void Package::cleanup()
         qDebug() << "Cleanup requested by config";
         QString file;
         foreach (file, tempFiles) {
-            QFile::remove(file);
+            rmPath(file);
         }
         tempFiles.clear();
     }
+}
+
+
+bool Package::rmPath(QString path)
+{
+    /* Since rmdir() is not static, a QDir object must be instantiated. For
+     * performance reasons this is made static so that it is instantiated only
+     * once instead on every recursion. */
+    static QDir dirObject;
+    bool success;
+
+    if (QFileInfo(path).isDir()) {
+        QDirIterator iterator(path, QDir::AllEntries | QDir::Hidden | QDir::NoDotAndDotDot);
+        success = true;
+        while (success && iterator.hasNext()) {
+            success = rmPath(iterator.next());
+        }
+        if (success) {
+            success = dirObject.rmdir(path);
+        }
+    } else {
+        success = QFile::remove(path);
+    }
+    if (!success) {
+        Application::critical(tr("Could not delete '%1'. Aborting").arg(path));
+    }
+    return success;
 }

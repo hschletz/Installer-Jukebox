@@ -121,6 +121,13 @@ protected:
     QStringList browsers();
 
     /**
+     * @brief Delete a path (file or directory) recursively.
+     * @param path Path to delete
+     * @return bool Success
+     */
+    bool rmPath(QString path);
+
+    /**
      * @brief List of temporary files
      *
      * Every temporary file generated during the package building process (by
