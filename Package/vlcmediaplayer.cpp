@@ -60,7 +60,7 @@ void VlcMediaPlayer::build(NSIS *installer, Version version)
 
     download(version, installer);
     installerFile.prepend(Application::getTmpDir() + "/");
-    tmpFiles << installerFile;
+    tempFiles << installerFile;
 
     if (!isError) {
         isError = !installer->build(
