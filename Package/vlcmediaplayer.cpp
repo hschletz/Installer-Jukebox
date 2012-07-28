@@ -151,7 +151,7 @@ void VlcMediaPlayer::download(Version version, Installer *installer)
     installer->addPreprocessCommand(
                 Command::cmdSpec(
                     Application::getConfig("installer_NSIS/makensis", "makensis").toString(),
-                    QStringList() << "-V2" << src
+                    QStringList() << "-V1" << src
                     )
                 );
 }
