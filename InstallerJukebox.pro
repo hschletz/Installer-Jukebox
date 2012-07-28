@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     command.cpp \
     Downloader/sourceforge.cpp \
     version.cpp \
-    Package/vlcmediaplayer.cpp
+    Package/vlcmediaplayer.cpp \
+    Package/opera.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -38,6 +39,7 @@ HEADERS  += dialog.h \
     Downloader/sourceforge.h \
     version.h \
     Package/vlcmediaplayer.h \
+    Package/opera.h
 
 FORMS    += dialog.ui \
     command.ui
@@ -50,7 +52,8 @@ OTHER_FILES += \
     InstallerJukebox.template.ini \
     README.txt \
     NSIS/VlcMediaPlayer/main.nsh \
-    NSIS/VlcMediaPlayer/blockOnIE.nsh
+    NSIS/VlcMediaPlayer/blockOnIE.nsh \
+    NSIS/Opera/main.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

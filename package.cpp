@@ -34,6 +34,7 @@
 #include "package.h"
 #include "Package/flashplayerplugin.h"
 #include "Package/flashplayeractivex.h"
+#include "Package/opera.h"
 #include "Package/vlcmediaplayer.h"
 
 Package::Package(const char *name, const char *minVersion) :
@@ -64,6 +65,8 @@ QMap<QString, Package *> Package::getPackages()
             package = new FlashPlayerPlugin();
         } else if (packageName.compare("Flash Player ActiveX", Qt::CaseInsensitive) == 0) {
             package = new FlashPlayerActiveX();
+        } else if (packageName.compare("Opera", Qt::CaseInsensitive) == 0) {
+            package = new Opera();
         } else if (packageName.compare("VLC Media Player", Qt::CaseInsensitive) == 0) {
             package = new VlcMediaPlayer();
         } else if (!packageName.startsWith("installer_")) { // "installer_*" are special sections, not a package

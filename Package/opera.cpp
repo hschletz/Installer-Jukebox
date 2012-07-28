@@ -23,27 +23,50 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "version.h"
+#include "application.h"
+#include "downloader.h"
+#include "opera.h"
 
-Version::Version() :
-    QVariant()
+Opera::Opera() :
+    Package("Opera", "12.00")
 {
 }
 
 
-Version::Version(QString versionString) :
-    QVariant(versionString)
+void Opera::build(NSIS *installer, Version version)
 {
+    QString src(loadResource(":NSIS/Opera/main.nsh"));
+    src.replace("${Opera}", QString("Opera_%1_int_Setup.exe").arg(version.stripDots()));
+
+    isError = false;
+    download(version);
+    if (!isError) {
+        installer->build(
+                    objectName(),
+                    getOutputFile(),
+                    NSIS::None, // TODO: ausprobieren
+                    50,
+                    QStringList("opera.exe"),
+                    tempFiles,
+                    src
+                    );
+    }
+    cleanup();
 }
 
 
-QString Version::stripDots()
+void Opera::download(Version version)
 {
-    return toString().remove('.');
-}
-
-
-Version::operator QString()
-{
-    return toString();
+    QString url("http://get.opera.com/pub/opera/win/%1/int/Opera_%1_int_Setup.exe");
+    QString target(
+                Downloader::get(
+                    url.arg(version.stripDots()),
+                    Application::getTmpDir()
+                    )
+                );
+    if (target.isEmpty()) {
+        isError = true;
+    } else {
+        tempFiles << target;
+    }
 }

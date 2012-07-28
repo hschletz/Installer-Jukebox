@@ -9,6 +9,7 @@ Supported packages are:
 
 - Flash Player ActiveX
 - Flash Player Plugin
+- Opera
 - VLC Media Player
 
 

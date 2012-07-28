@@ -23,27 +23,33 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "version.h"
+#ifndef OPERA_H
+#define OPERA_H
 
-Version::Version() :
-    QVariant()
+#include "package.h"
+
+/**
+ * @brief %Opera package
+ */
+class Opera : public Package
 {
-}
 
+public:
 
-Version::Version(QString versionString) :
-    QVariant(versionString)
-{
-}
+    /**
+     * @brief Constructor
+     */
+    Opera();
 
+    void build(NSIS *installer, Version version);
 
-QString Version::stripDots()
-{
-    return toString().remove('.');
-}
+private:
 
+    /**
+     * @brief Download installer
+     * @param version Version
+     */
+    void download(Version version);
+};
 
-Version::operator QString()
-{
-    return toString();
-}
+#endif // OPERA_H

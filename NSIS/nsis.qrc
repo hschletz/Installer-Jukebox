@@ -6,5 +6,6 @@
         <file>plugins/nsProcess.dll</file>
         <file>VlcMediaPlayer/main.nsh</file>
         <file>VlcMediaPlayer/blockOnIE.nsh</file>
+        <file>Opera/main.nsh</file>
     </qresource>
 </RCC>

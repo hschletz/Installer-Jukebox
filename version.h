@@ -49,6 +49,12 @@ public:
     Version(QString versionString);
 
     /**
+     * @brief Return version number without dots
+     * @return QString
+     */
+    QString stripDots();
+
+    /**
      * @brief Convert to string
      */
     operator QString();
