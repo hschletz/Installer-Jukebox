@@ -123,20 +123,20 @@ void VlcMediaPlayer::download(Version version, Installer *installer)
         QTextStream stream(&file);
         QString content(stream.readAll());
         if (disableActiveX) {
-            if (!replace(content, "!define INSTALL_ACTIVEX", "")) {
+            if (!patch(content, "!define INSTALL_ACTIVEX", "")) {
                 return;
             }
         }
         if (disableMozilla) {
-            if (!replace(content, "!define INSTALL_MOZILLA", "")) {
+            if (!patch(content, "!define INSTALL_MOZILLA", "")) {
                 return;
             }
         }
         if (uninstallOldVersion) {
-            if (!replace(content, "$Message_AlreadyInstalled /SD IDNO", "$Message_AlreadyInstalled /SD IDYES")) {
+            if (!patch(content, "$Message_AlreadyInstalled /SD IDNO", "$Message_AlreadyInstalled /SD IDYES")) {
                 return;
             }
-            if (!replace(content, "$R0 _?=$INSTDIR", "$R0 /S _?=$INSTDIR")) {
+            if (!patch(content, "$R0 _?=$INSTDIR", "$R0 /S _?=$INSTDIR")) {
                 return;
             }
         }
@@ -157,10 +157,10 @@ void VlcMediaPlayer::download(Version version, Installer *installer)
 }
 
 
-bool VlcMediaPlayer::replace(QString &content, QString before, QString after)
+bool VlcMediaPlayer::patch(QString &source, QString before, QString after)
 {
-    if (content.count(before) == 1) {
-        content.replace(before, after);
+    if (source.count(before) == 1) {
+        source.replace(before, after);
         qDebug() << "Replaced" << before << "with" << after;
         return true;
     } else {
