@@ -1,0 +1,1 @@
+    ExecWait '"$PLUGINSDIR\${VLCinstaller}" /S'

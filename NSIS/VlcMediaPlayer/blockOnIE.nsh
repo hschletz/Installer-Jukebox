@@ -1,0 +1,1 @@
+!insertmacro blockOnIE

@@ -4,5 +4,7 @@
         <file>FlashPlayerActiveX/main.nsh</file>
         <file>FlashPlayerPlugin/main.nsh</file>
         <file>plugins/nsProcess.dll</file>
+        <file>VlcMediaPlayer/main.nsh</file>
+        <file>VlcMediaPlayer/blockOnIE.nsh</file>
     </qresource>
 </RCC>

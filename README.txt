@@ -9,12 +9,14 @@ Supported packages are:
 
 - Flash Player ActiveX
 - Flash Player Plugin
+- VLC Media Player
 
 
 Requirements
 
 - Qt SDK (http://qt-project.org) for compiling the application
 - NSIS (http://nsis.sourceforge.net) for generating installers
+- For VLC Media Player: a 7z extraction utility, like http://7-zip.org
 
 While the generated installers are only useful in a Windows environment, the
 Installer Jukebox itself can run under any OS supported by Qt and NSIS -
