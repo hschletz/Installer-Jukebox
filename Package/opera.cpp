@@ -23,6 +23,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <QDebug>
+#include <QTextStream>
 #include "application.h"
 #include "downloader.h"
 #include "opera.h"
@@ -36,7 +38,17 @@ Opera::Opera() :
 void Opera::build(NSIS *installer, Version version)
 {
     QString src(loadResource(":NSIS/Opera/main.nsh"));
+    QString installerOptions;
+    QTextStream stream(&installerOptions);
+    stream << " /desktopshortcut " << Application::getConfig("Opera/Desktop shortcut", true).toBool();
+    stream << " /quicklaunchshortcut " << Application::getConfig("Opera/Quick launch shortcut", true).toBool();
+    stream << " /startmenushortcut " << Application::getConfig("Opera/Start menu shortcut", true).toBool();
+    stream << " /allusers " << !Application::getConfig("Opera/Install for current user only", false).toBool();
+    stream << " /singleprofile " << Application::getConfig("Opera/Single profile", false).toBool();
+    stream << " /setdefaultbrowser " << Application::getConfig("Opera/Set default browser", true).toBool();
+    qDebug() <<"Installer options:" << installerOptions;
     src.replace("${Opera}", QString("Opera_%1_int_Setup.exe").arg(version.stripDots()));
+    src.replace("${InstallerOptions}", installerOptions);
 
     isError = false;
     download(version);
