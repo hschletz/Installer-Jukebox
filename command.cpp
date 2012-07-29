@@ -103,7 +103,7 @@ void Command::finish(int exitCode, QProcess::ExitStatus exitStatus)
 
     if (commands.isEmpty()) {
         // No more commands in the queue, perform final actions
-        if (!successMessage.isEmpty()){
+        if (!isError && !successMessage.isEmpty()){
             Application::information(successMessage);
         }
         // Close dialog if requested or there is no output, turn "Cancel" into "Close" otherwise
