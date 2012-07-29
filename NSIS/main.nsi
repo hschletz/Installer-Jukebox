@@ -40,6 +40,8 @@ ShowInstDetails show
 OutFile "${outputFile}"
 RequestExecutionLevel admin
 
+### EXTRA_HEADER ###
+
 Function .onInit
     # Force admin privileges
     UserInfo::GetAccountType

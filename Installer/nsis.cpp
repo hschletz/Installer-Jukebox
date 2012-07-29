@@ -48,7 +48,8 @@ bool NSIS::build(
         uint minSpaceRequired,
         QStringList blockingProcesses,
         QStringList files,
-        QString script
+        QString script,
+        QString extraHeader
         )
 {
     // Get NSIS template
@@ -107,6 +108,9 @@ bool NSIS::build(
         fileCommands << QString("File \"%1\"").arg(QDir::toNativeSeparators(file));
     }
     source.replace("### FILES ###", fileCommands.join("\n    "));
+
+    // Insert extra headers
+    source.replace("### EXTRA_HEADER ###", extraHeader);
 
     // Insert installation script fragment.
     source.replace("### INSTALL_PACKAGE ###", script);

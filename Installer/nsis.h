@@ -67,6 +67,7 @@ public:
      * @param blockingProcesses List of process names that will be forced to terminate before installation.
      * @param files List of files to include in the package
      * @param script %NSIS code fragment that does the actual installation
+     * @param extraHeader %NSIS code fragment placed outside any section or function
      * @return bool Success
      */
     bool build(QString name,
@@ -75,8 +76,9 @@ public:
                uint minSpaceRequired,
                QStringList blockingProcesses,
                QStringList files,
-               QString script
-               );
+               QString script,
+               QString extraHeader=""
+            );
 
     /**
      * @brief Destructor
