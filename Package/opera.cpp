@@ -24,6 +24,7 @@
  */
 
 #include <QDebug>
+#include <QFileInfo>
 #include <QTextStream>
 #include "application.h"
 #include "downloader.h"
@@ -37,6 +38,7 @@ Opera::Opera() :
 
 void Opera::build(NSIS *installer, Version version)
 {
+    // Load main script and construct installer command line.
     QString src(loadResource(":NSIS/Opera/main.nsh"));
     QString installerOptions;
     QTextStream stream(&installerOptions);
@@ -50,17 +52,39 @@ void Opera::build(NSIS *installer, Version version)
     src.replace("${Opera}", QString("Opera_%1_int_Setup.exe").arg(version.stripDots()));
     src.replace("${InstallerOptions}", installerOptions);
 
+    QStringList files;
+    QString extraHeader;
+
+    // Install customized speed dial.
+    QString speedDial(Application::getConfig("Opera/Speed dial template").toString());
+    if (!speedDial.isEmpty()) {
+        qDebug() << "Using speed dial template:" << speedDial;
+        files << speedDial;
+        src += loadResource(":NSIS/Opera/speeddial.nsh").replace("${SpeedDial}", QFileInfo(speedDial).fileName());
+        extraHeader += loadResource(":NSIS/Opera/speeddial_header.nsh");
+    }
+
+    // Construct application path depending on configuration.
+    if (Application::getConfig("Opera/Install for current user only", false).toBool()) {
+        src.replace("${OperaDir}", "$LOCALAPPDATA\\Programs\\Opera");
+    } else {
+        src.replace("${OperaDir}", "$PROGRAMFILES32\\Opera");
+    }
+
+    // Download and build the package.
     isError = false;
     download(version);
     if (!isError) {
+        files << tempFiles;
         installer->build(
                     objectName(),
                     getOutputFile(),
-                    NSIS::None, // TODO: ausprobieren
+                    NSIS::None,
                     50,
                     QStringList("opera.exe"),
-                    tempFiles,
-                    src
+                    files,
+                    src,
+                    extraHeader
                     );
     }
     cleanup();

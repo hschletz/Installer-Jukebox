@@ -53,7 +53,9 @@ OTHER_FILES += \
     README.txt \
     NSIS/VlcMediaPlayer/main.nsh \
     NSIS/VlcMediaPlayer/blockOnIE.nsh \
-    NSIS/Opera/main.nsh
+    NSIS/Opera/main.nsh \
+    NSIS/Opera/speeddial.nsh \
+    NSIS/Opera/speeddial_header.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

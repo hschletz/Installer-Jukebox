@@ -7,5 +7,7 @@
         <file>VlcMediaPlayer/main.nsh</file>
         <file>VlcMediaPlayer/blockOnIE.nsh</file>
         <file>Opera/main.nsh</file>
+        <file>Opera/speeddial.nsh</file>
+        <file>Opera/speeddial_header.nsh</file>
     </qresource>
 </RCC>
