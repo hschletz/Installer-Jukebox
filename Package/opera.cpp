@@ -42,12 +42,12 @@ void Opera::build(NSIS *installer, Version version)
     QString src(loadResource(":NSIS/Opera/main.nsh"));
     QString installerOptions;
     QTextStream stream(&installerOptions);
-    stream << " /desktopshortcut " << Application::getConfig("Opera/Desktop shortcut", true).toBool();
-    stream << " /quicklaunchshortcut " << Application::getConfig("Opera/Quick launch shortcut", true).toBool();
-    stream << " /startmenushortcut " << Application::getConfig("Opera/Start menu shortcut", true).toBool();
-    stream << " /allusers " << !Application::getConfig("Opera/Install for current user only", false).toBool();
-    stream << " /singleprofile " << Application::getConfig("Opera/Single profile", false).toBool();
-    stream << " /setdefaultbrowser " << Application::getConfig("Opera/Set default browser", true).toBool();
+    stream << " /desktopshortcut " << getConfig("Desktop shortcut", true).toBool();
+    stream << " /quicklaunchshortcut " << getConfig("Quick launch shortcut", true).toBool();
+    stream << " /startmenushortcut " << getConfig("Start menu shortcut", true).toBool();
+    stream << " /allusers " << !getConfig("Install for current user only", false).toBool();
+    stream << " /singleprofile " << getConfig("Single profile", false).toBool();
+    stream << " /setdefaultbrowser " << getConfig("Set default browser", true).toBool();
     qDebug() <<"Installer options:" << installerOptions;
     src.replace("${Opera}", QString("Opera_%1_int_Setup.exe").arg(version.stripDots()));
     src.replace("${InstallerOptions}", installerOptions);
@@ -56,7 +56,7 @@ void Opera::build(NSIS *installer, Version version)
     QString extraHeader;
 
     // Install customized speed dial.
-    QString speedDial(Application::getConfig("Opera/Speed dial template").toString());
+    QString speedDial(getConfig("Speed dial template").toString());
     if (!speedDial.isEmpty()) {
         qDebug() << "Using speed dial template:" << speedDial;
         files << speedDial;
@@ -65,7 +65,7 @@ void Opera::build(NSIS *installer, Version version)
     }
 
     // Construct application path depending on configuration.
-    if (Application::getConfig("Opera/Install for current user only", false).toBool()) {
+    if (getConfig("Install for current user only", false).toBool()) {
         src.replace("${OperaDir}", "$LOCALAPPDATA\\Programs\\Opera");
     } else {
         src.replace("${OperaDir}", "$PROGRAMFILES32\\Opera");

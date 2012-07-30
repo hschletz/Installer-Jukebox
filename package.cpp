@@ -119,7 +119,7 @@ void Package::build(NSIS *installer, Version version)
 QString Package::getOutputFile()
 {
     // Get "Output file" option from the corresponding section (objectName() returns package name)
-    QString outputFile = Application::getConfig(objectName() + "/Output file").toString();
+    QString outputFile = getConfig("Output file").toString();
     if (outputFile.isEmpty()) {
         qDebug() << "Output file not configured!";
         Application::critical(tr("Output file is not configured!"));
@@ -243,4 +243,10 @@ bool Package::extract7zArchive(QString archive)
     command.closeOnSuccess = true;
     command.exec();
     return !command.hasErrors();
+}
+
+
+QVariant Package::getConfig(const QString &key, const QVariant &defaultValue)
+{
+    return Application::getConfig(objectName() + "/" + key, defaultValue);
 }

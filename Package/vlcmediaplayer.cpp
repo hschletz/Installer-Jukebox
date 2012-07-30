@@ -42,7 +42,7 @@ void VlcMediaPlayer::build(NSIS *installer, Version version)
     // Compose list of blocking processes. If the Mozilla plugin is enabled,
     // this includes supported browsers.
     QStringList blockingProcesses("vlc.exe");
-    if (Application::getConfig("VLC Media Player/Install Mozilla plugin", true).toBool()) {
+    if (getConfig("Install Mozilla plugin", true).toBool()) {
         blockingProcesses << browsers();
     }
 
@@ -54,7 +54,7 @@ void VlcMediaPlayer::build(NSIS *installer, Version version)
     src.replace("${VLCinstaller}", installerFile);
 
     // If the ActiveX plugin is enabled, force closing all IE windows.
-    if (Application::getConfig("VLC Media Player/Install ActiveX plugin", true).toBool()) {
+    if (getConfig("Install ActiveX plugin", true).toBool()) {
         src.prepend(loadResource(":NSIS/VlcMediaPlayer/blockOnIE.nsh"));
     }
 
@@ -111,9 +111,9 @@ void VlcMediaPlayer::download(Version version, Installer *installer)
 
     // Patch the installer if necessary
     QString src(extractedPath + "/vlc.win32.nsi");
-    bool disableActiveX = !Application::getConfig("VLC Media Player/Install ActiveX plugin", true).toBool();
-    bool disableMozilla = !Application::getConfig("VLC Media Player/Install Mozilla plugin", true).toBool();
-    bool uninstallOldVersion = Application::getConfig("VLC Media Player/Uninstall old version").toBool();
+    bool disableActiveX = !getConfig("Install ActiveX plugin", true).toBool();
+    bool disableMozilla = !getConfig("Install Mozilla plugin", true).toBool();
+    bool uninstallOldVersion = getConfig("Uninstall old version").toBool();
     if (disableActiveX or disableMozilla or uninstallOldVersion) {
         QFile file(src);
         if (!file.open(QIODevice::ReadWrite)) {

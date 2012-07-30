@@ -29,6 +29,7 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include <QVariant>
 #include "version.h"
 #include "Installer/nsis.h"
 
@@ -155,5 +156,13 @@ protected:
      * @brief Minimum supported version
      */
     Version minVersion;
+
+    /**
+     * @brief Get a value from package's section in the config file
+     * @param key Key name, without package prefix
+     * @param defaultValue Value to return if no value is present in the config file
+     * @return QVariant
+     */
+    QVariant getConfig(const QString &key, const QVariant &defaultValue=QVariant());
 };
 #endif // PACKAGE_H
