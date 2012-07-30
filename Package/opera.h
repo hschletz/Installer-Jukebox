@@ -26,6 +26,8 @@
 #ifndef OPERA_H
 #define OPERA_H
 
+#include <QString>
+#include <QVariant>
 #include "package.h"
 
 /**
@@ -35,6 +37,25 @@ class Opera : public Package
 {
 
 public:
+
+    /**
+     * @brief Datatypes for INI file options
+     */
+    enum optionType {
+        string, /**< A string. It it contains commas, it must be quoted, otherwise it is invalid. */
+        integer, /**< An integer. */
+        boolean, /**< A boolean. */
+        boolean_inverted, /**< A boolean, but its value gets inverted. Useful to avoid double negation logic. */
+        stringlist /**< A list of strings, separated by one or more blanks. */
+    };
+
+    /**
+     * @brief Type of %Opera INI file
+     */
+    enum iniFile {
+        defaults, /**< ${OperaDir}\\operaprefs_default.ini, settings can be overridden by user */
+        fixed /**< $SYSDIR%\\operaprefs_fixed.ini, settings can not be overridden */
+    };
 
     /**
      * @brief Constructor
@@ -50,6 +71,27 @@ private:
      * @param version Version
      */
     void download(Version version);
+
+    /**
+     * @brief Set/delete an option in both INI files
+     * @param name Option name in the %Installer Jukebox config file
+     * @param type Value's datatype
+     * @param section Section name in Opera's config files
+     * @param key Key name in Opera's config files
+     * @return QString NSIS command lines
+     */
+    QString setOptionNSIS(QString name, optionType type, QString section, QString key);
+
+    /**
+     * @brief Set/delete an option in a particular INI file
+     * @param file Type of INI file
+     * @param section Section name in Opera's config files
+     * @param key Key name in Opera's config files
+     * @param value Value to set
+     * @param type Value's datatype
+     * @return QString
+     */
+    QString setOptionNSIS(iniFile file, QString section, QString key, QVariant value, optionType type);
 };
 
 #endif // OPERA_H

@@ -64,6 +64,16 @@ void Opera::build(NSIS *installer, Version version)
         extraHeader += loadResource(":NSIS/Opera/speeddial_header.nsh");
     }
 
+    // Customize configuration files
+    src += setOptionNSIS("Use password manager", boolean, "User Prefs", "Enable Wand");
+    src += setOptionNSIS("Use phishing filter", boolean, "User Prefs", "Enable Trust Rating");
+    src += setOptionNSIS("Disk cache size", integer, "Disk Cache", "Size");
+    src += setOptionNSIS("Use automatic update", boolean_inverted, "User Prefs", "Disable Opera Package AutoUpdate");
+    src += setOptionNSIS("Local hostnames", stringlist, "User Prefs", "IntranetHosts");
+    src += setOptionNSIS("Hostname expansion", boolean, "Network", "Enable HostName Expansion");
+    src += setOptionNSIS("Search network neighborhood", boolean, "Network", "Check Local HostName");
+    src += setOptionNSIS("Enable Do Not Track Header", boolean, "Network", "Enable Do Not Track Header");
+
     // Construct application path depending on configuration.
     if (getConfig("Install for current user only", false).toBool()) {
         src.replace("${OperaDir}", "$LOCALAPPDATA\\Programs\\Opera");
@@ -105,4 +115,49 @@ void Opera::download(Version version)
     } else {
         tempFiles << target;
     }
+}
+
+
+QString Opera::setOptionNSIS(QString name, optionType type, QString section, QString key)
+{
+    // Return NSIS code for both forms ("name" and "name*).
+    return
+            setOptionNSIS(defaults, section, key, getConfig(name), type)
+            + setOptionNSIS(fixed, section, key, getConfig(name + "*"), type);
+}
+
+
+QString Opera::setOptionNSIS(iniFile file, QString section, QString key, QVariant value, optionType type)
+{
+    QString cmd;
+    if (value.isValid()) {
+        cmd = "    WriteINIStr '%2' '%3' '%4' '%1'\n"; // WriteINIStr file section key value
+        // Replace %1 with value
+        switch (type) {
+        case string:
+            cmd = cmd.arg(value.toString());
+            break;
+        case integer:
+            cmd = cmd.arg(value.toInt());
+            break;
+        case boolean:
+            cmd = cmd.arg(value.toBool());
+            break;
+        case boolean_inverted:
+            cmd = cmd.arg(!value.toBool());
+            break;
+        case stringlist:
+            // Convert space-separated string into a comma-separated string
+            cmd = cmd.arg(value.toString().split(" ", QString::SkipEmptyParts).join(","));
+            break;
+        default:
+            throw; // Programming error, should never happen
+        }
+    } else {
+        // Option was not configured. Delete it explicitly.
+        cmd = "    DeleteINIStr '%1' '%2' '%3'\n"; // DeleteINIStr file section key
+    }
+
+    return cmd.arg(file == fixed ? "$SYSDIR\\operaprefs_fixed.ini" : "${OperaDir}\\operaprefs_default.ini")
+            .arg(section).arg(key);
 }
