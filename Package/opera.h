@@ -39,6 +39,15 @@ class Opera : public Package
 public:
 
     /**
+     * @brief Constructor
+     */
+    Opera();
+
+    void build(NSIS *installer, Version version);
+
+private:
+
+    /**
      * @brief Datatypes for INI file options
      */
     enum optionType {
@@ -58,13 +67,9 @@ public:
     };
 
     /**
-     * @brief Constructor
+     * @brief Callback for setting options in an Opera INI file
      */
-    Opera();
-
-    void build(NSIS *installer, Version version);
-
-private:
+    typedef QString(Opera::*setOptionNSIScallback)(iniFile, QVariant);
 
     /**
      * @brief Download installer
@@ -83,6 +88,18 @@ private:
     QString setOptionNSIS(QString name, optionType type, QString section, QString key);
 
     /**
+     * @brief Set/delete an option in both INI files using a callback method
+     *
+     * This is used for complex options that cannot be translated directly from
+     * the configuration file, for example if 1 Option influences multiple Opera
+     * settings or the value needs transformation.
+     * @param name Option name in the %Installer Jukebox config file
+     * @param callback Method that gets called with an INI file type and the option value, returning NSIS code
+     * @return QString NSIS command lines
+     */
+    QString setOptionNSIS(QString name, setOptionNSIScallback callback);
+
+    /**
      * @brief Set/delete an option in a particular INI file
      * @param file Type of INI file
      * @param section Section name in Opera's config files
@@ -92,6 +109,22 @@ private:
      * @return QString
      */
     QString setOptionNSIS(iniFile file, QString section, QString key, QVariant value, optionType type);
+
+    /**
+     * @brief Callback for setting the mailto: handler
+     * @param file
+     * @param value
+     * @return QString
+     */
+    QString setMailHandlerNSIS(iniFile file, QVariant value);
+
+    /**
+     * @brief Callback for setting a proxy configuration script
+     * @param file
+     * @param value
+     * @return QString
+     */
+    QString setProxyScriptNSIS(iniFile file, QVariant value);
 };
 
 #endif // OPERA_H

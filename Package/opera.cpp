@@ -73,6 +73,8 @@ void Opera::build(NSIS *installer, Version version)
     src += setOptionNSIS("Hostname expansion", boolean, "Network", "Enable HostName Expansion");
     src += setOptionNSIS("Search network neighborhood", boolean, "Network", "Check Local HostName");
     src += setOptionNSIS("Enable Do Not Track Header", boolean, "Network", "Enable Do Not Track Header");
+    src += setOptionNSIS("Mail handler", &Opera::setMailHandlerNSIS);
+    src += setOptionNSIS("Proxy configuration script", &Opera::setProxyScriptNSIS);
 
     // Construct application path depending on configuration.
     if (getConfig("Install for current user only", false).toBool()) {
@@ -127,6 +129,12 @@ QString Opera::setOptionNSIS(QString name, optionType type, QString section, QSt
 }
 
 
+QString Opera::setOptionNSIS(QString name, setOptionNSIScallback callback)
+{
+    return (this->*callback)(defaults, getConfig(name)) + (this->*callback)(fixed, getConfig(name + "*"));
+}
+
+
 QString Opera::setOptionNSIS(iniFile file, QString section, QString key, QVariant value, optionType type)
 {
     QString cmd;
@@ -160,4 +168,35 @@ QString Opera::setOptionNSIS(iniFile file, QString section, QString key, QVarian
 
     return cmd.arg(file == fixed ? "$SYSDIR\\operaprefs_fixed.ini" : "${OperaDir}\\operaprefs_default.ini")
             .arg(section).arg(key);
+}
+
+
+QString Opera::setMailHandlerNSIS(iniFile file, QVariant value)
+{
+    QString handler(value.toString());
+    if (handler.isEmpty()) {
+        return setOptionNSIS(file, "Mail", "External Application", QVariant(), string)
+                + setOptionNSIS(file, "Mail", "Handler", QVariant(), integer);
+    } else if (handler.compare("builtin", Qt::CaseInsensitive) == 0) {
+        return setOptionNSIS(file, "Mail", "External Application", QVariant(), string)
+                + setOptionNSIS(file, "Mail", "Handler", 1, integer);
+    } else if (handler.compare("system", Qt::CaseInsensitive) == 0) {
+        return setOptionNSIS(file, "Mail", "External Application", QVariant(), string)
+                + setOptionNSIS(file, "Mail", "Handler", 3, integer);
+    } else {
+        return setOptionNSIS(file, "Mail", "External Application", handler, string)
+                + setOptionNSIS(file, "Mail", "Handler", 2, integer);
+    }
+}
+
+
+QString Opera::setProxyScriptNSIS(iniFile file, QVariant value)
+{
+    if (value.isValid()) {
+        return setOptionNSIS(file, "Proxy", "Use Automatic Proxy Configuration", 1, integer)
+                + setOptionNSIS(file, "Proxy", "Automatic Proxy Configuration URL", value, string);
+    } else {
+        return setOptionNSIS(file, "Proxy", "Use Automatic Proxy Configuration", QVariant(), integer)
+                + setOptionNSIS(file, "Proxy", "Automatic Proxy Configuration URL", QVariant(), string);
+    }
 }
