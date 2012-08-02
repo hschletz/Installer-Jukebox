@@ -75,6 +75,7 @@ void Opera::build(NSIS *installer, Version version)
     src += setOptionNSIS("Enable Do Not Track Header", boolean, "Network", "Enable Do Not Track Header");
     src += setOptionNSIS("Mail handler", &Opera::setMailHandlerNSIS);
     src += setOptionNSIS("Proxy configuration script", &Opera::setProxyScriptNSIS);
+    src += setOptionNSIS("Enable geolocation", boolean, "Geolocation", "Enable Geolocation");
 
     // Construct application path depending on configuration.
     if (getConfig("Install for current user only", false).toBool()) {
