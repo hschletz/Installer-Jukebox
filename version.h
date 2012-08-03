@@ -56,6 +56,13 @@ public:
     uint numParts();
 
     /**
+     * @brief Return a single part ("a.b.c", 2 => "b")
+     * @param position Number of component (starting with 1). If it does not exist, return an empty string.
+     * @return QString
+     */
+    QString part(uint position);
+
+    /**
      * @brief Return truncated version ("a.b.c", 2 => "a.b")
      * @param length New length. If the current length is shorter, the unmodified version is returned.
      * @return Version

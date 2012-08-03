@@ -43,6 +43,12 @@ uint Version::numParts()
 }
 
 
+QString Version::part(uint position)
+{
+    return split().value(position - 1);
+}
+
+
 Version Version::truncate(uint length)
 {
     return QStringList(split().mid(0, length)).join(".");
