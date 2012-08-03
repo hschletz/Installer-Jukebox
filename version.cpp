@@ -37,9 +37,46 @@ Version::Version(QString versionString) :
 }
 
 
+uint Version::numParts()
+{
+    return split().size();
+}
+
+
+Version Version::truncate(uint length)
+{
+    return QStringList(split().mid(0, length)).join(".");
+}
+
+
+Version Version::pad(uint length)
+{
+    QStringList parts(split());
+    parts.reserve(length);
+    while ((uint) parts.size() < length) {
+        parts << "0";
+    }
+    return parts.join(".");
+}
+
+
+Version Version::replace(uint position, QString value)
+{
+    QStringList parts(split());
+    parts.replace(position - 1, value);
+    return parts.join(".");
+}
+
+
 QString Version::stripDots()
 {
     return toString().remove('.');
+}
+
+
+QStringList Version::split()
+{
+    return toString().split('.');
 }
 
 

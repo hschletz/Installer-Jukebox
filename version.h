@@ -27,6 +27,7 @@
 #define VERSION_H
 
 #include <QString>
+#include <QStringList>
 #include <QVariant>
 
 /**
@@ -49,10 +50,44 @@ public:
     Version(QString versionString);
 
     /**
+     * @brief Return number of components ("a.b.c" => 3)
+     * @return uint
+     */
+    uint numParts();
+
+    /**
+     * @brief Return truncated version ("a.b.c", 2 => "a.b")
+     * @param length New length. If the current length is shorter, the unmodified version is returned.
+     * @return Version
+     */
+    Version truncate(uint length);
+
+    /**
+     * @brief Return version zero-padded to the given length ("a.b", 3 => "a.b.0")
+     * @param length New length. If the current length is equal or longer, the unmodified version is returned.
+     * @return Version
+     */
+    Version pad(uint length);
+
+    /**
+     * @brief Return version with a component replaced by another string ("a.b.c", 3, "x" => "a.b.x")
+     * @param position Number of component (starting with 1) to replace. The component must exist!
+     * @param value Replacement string
+     * @return Version
+     */
+    Version replace(uint position, QString value);
+
+    /**
      * @brief Return version number without dots
      * @return QString
      */
     QString stripDots();
+
+    /**
+     * @brief Return list of components ("a.b.c" => "a", "b", "c")
+     * @return QStringList
+     */
+    QStringList split();
 
     /**
      * @brief Convert to string
