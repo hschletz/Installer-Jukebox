@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     Downloader/sourceforge.cpp \
     version.cpp \
     Package/vlcmediaplayer.cpp \
-    Package/opera.cpp
+    Package/opera.cpp \
+    Package/adobereader.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -39,7 +40,8 @@ HEADERS  += dialog.h \
     Downloader/sourceforge.h \
     version.h \
     Package/vlcmediaplayer.h \
-    Package/opera.h
+    Package/opera.h \
+    Package/adobereader.h
 
 FORMS    += dialog.ui \
     command.ui
@@ -55,7 +57,11 @@ OTHER_FILES += \
     NSIS/VlcMediaPlayer/blockOnIE.nsh \
     NSIS/Opera/main.nsh \
     NSIS/Opera/speeddial.nsh \
-    NSIS/Opera/speeddial_header.nsh
+    NSIS/Opera/speeddial_header.nsh \
+    NSIS/AdobeReader/main.nsh \
+    NSIS/AdobeReader/header.nsh \
+    NSIS/AdobeReader/installpatch.nsh \
+    NSIS/AdobeReader/disableupdater.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

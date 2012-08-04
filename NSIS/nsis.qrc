@@ -9,5 +9,9 @@
         <file>Opera/main.nsh</file>
         <file>Opera/speeddial.nsh</file>
         <file>Opera/speeddial_header.nsh</file>
+        <file>AdobeReader/main.nsh</file>
+        <file>AdobeReader/header.nsh</file>
+        <file>AdobeReader/installpatch.nsh</file>
+        <file>AdobeReader/disableupdater.nsh</file>
     </qresource>
 </RCC>

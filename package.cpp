@@ -32,6 +32,7 @@
 #include "command.h"
 #include "installer.h"
 #include "package.h"
+#include "Package/adobereader.h"
 #include "Package/flashplayerplugin.h"
 #include "Package/flashplayeractivex.h"
 #include "Package/opera.h"
@@ -61,7 +62,9 @@ QMap<QString, Package *> Package::getPackages()
     foreach (packageName, Application::getConfigGroups()) {
         // Generate matching subclass for every section found
         package = 0;
-        if (packageName.compare("Flash Player Plugin", Qt::CaseInsensitive) == 0) {
+        if (packageName.compare("Adobe Reader", Qt::CaseInsensitive) == 0) {
+            package = new AdobeReader();
+        } else if (packageName.compare("Flash Player Plugin", Qt::CaseInsensitive) == 0) {
             package = new FlashPlayerPlugin();
         } else if (packageName.compare("Flash Player ActiveX", Qt::CaseInsensitive) == 0) {
             package = new FlashPlayerActiveX();
