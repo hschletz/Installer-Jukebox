@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     version.cpp \
     Package/vlcmediaplayer.cpp \
     Package/opera.cpp \
-    Package/adobereader.cpp
+    Package/adobereader.cpp \
+    Package/libreoffice.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -41,7 +42,8 @@ HEADERS  += dialog.h \
     version.h \
     Package/vlcmediaplayer.h \
     Package/opera.h \
-    Package/adobereader.h
+    Package/adobereader.h \
+    Package/libreoffice.h
 
 FORMS    += dialog.ui \
     command.ui
@@ -61,7 +63,8 @@ OTHER_FILES += \
     NSIS/AdobeReader/main.nsh \
     NSIS/AdobeReader/header.nsh \
     NSIS/AdobeReader/installpatch.nsh \
-    NSIS/AdobeReader/disableupdater.nsh
+    NSIS/AdobeReader/disableupdater.nsh \
+    NSIS/LibreOffice/main.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

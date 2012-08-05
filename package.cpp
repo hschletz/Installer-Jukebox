@@ -35,6 +35,7 @@
 #include "Package/adobereader.h"
 #include "Package/flashplayerplugin.h"
 #include "Package/flashplayeractivex.h"
+#include "Package/libreoffice.h"
 #include "Package/opera.h"
 #include "Package/vlcmediaplayer.h"
 
@@ -68,6 +69,8 @@ QMap<QString, Package *> Package::getPackages()
             package = new FlashPlayerPlugin();
         } else if (packageName.compare("Flash Player ActiveX", Qt::CaseInsensitive) == 0) {
             package = new FlashPlayerActiveX();
+        } else if (packageName.compare("LibreOffice", Qt::CaseInsensitive) == 0) {
+            package = new LibreOffice();
         } else if (packageName.compare("Opera", Qt::CaseInsensitive) == 0) {
             package = new Opera();
         } else if (packageName.compare("VLC Media Player", Qt::CaseInsensitive) == 0) {
