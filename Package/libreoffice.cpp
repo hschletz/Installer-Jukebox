@@ -42,6 +42,8 @@ void LibreOffice::build(NSIS *installer, Version version)
     isError = false;
     download(version);
     if (!isError) {
+        QStringList files(tempFiles);
+
         QStringList msiOptions("ADDLOCAL=ALL");
         QStringList removeComponents;
 
@@ -62,15 +64,33 @@ void LibreOffice::build(NSIS *installer, Version version)
         src.replace("${MsiFile}", QFileInfo(tempFiles.first()).fileName());
         src.replace("${MsiOptions}", msiOptions.join(" "));
 
-        installer->build(
-                    objectName(),
-                    getOutputFile(),
-                    NSIS::Zlib,
-                    800,
-                    QStringList() << "soffice.exe" << "soffice.bin",
-                    tempFiles,
-                    src
-                    );
+        // Use configuration template if configured
+        QString configTemplate(getConfig("Configuration template").toString());
+        if (!configTemplate.isEmpty()) {
+            QFileInfo file(configTemplate);
+            if (file.isReadable()) {
+                files << configTemplate;
+                src += loadResource(":NSIS/LibreOffice/configtemplate.nsh")
+                        .replace("${ConfigTemplate}", file.fileName())
+                        .replace("${ShortVersion}", version.truncate(2))
+                        ;
+            } else {
+                Application::critical(tr("The configuration template '%1' cannot be read.").arg(configTemplate));
+                isError = true;
+            }
+        }
+
+        if (!isError) {
+            installer->build(
+                        objectName(),
+                        getOutputFile(),
+                        NSIS::Zlib,
+                        800,
+                        QStringList() << "soffice.exe" << "soffice.bin",
+                        files,
+                        src
+                        );
+        }
     }
     cleanup();
 }

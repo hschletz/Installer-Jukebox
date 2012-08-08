@@ -64,7 +64,8 @@ OTHER_FILES += \
     NSIS/AdobeReader/header.nsh \
     NSIS/AdobeReader/installpatch.nsh \
     NSIS/AdobeReader/disableupdater.nsh \
-    NSIS/LibreOffice/main.nsh
+    NSIS/LibreOffice/main.nsh \
+    NSIS/LibreOffice/configtemplate.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

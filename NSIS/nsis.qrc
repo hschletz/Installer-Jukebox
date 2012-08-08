@@ -14,5 +14,6 @@
         <file>AdobeReader/installpatch.nsh</file>
         <file>AdobeReader/disableupdater.nsh</file>
         <file>LibreOffice/main.nsh</file>
+        <file>LibreOffice/configtemplate.nsh</file>
     </qresource>
 </RCC>
