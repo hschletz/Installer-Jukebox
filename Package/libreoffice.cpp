@@ -32,7 +32,7 @@
 
 
 LibreOffice::LibreOffice() :
-    Package("LibreOffice", "3.5.5")
+    Package("LibreOffice", "3.6.0")
 {
 }
 
@@ -52,6 +52,9 @@ void LibreOffice::build(NSIS *installer, Version version)
         if (!removeComponents.isEmpty()) {
             msiOptions << "REMOVE=" + removeComponents.join(",");
         }
+
+        msiOptions << QString("CREATEDESKTOPLINK=%1").arg(getConfig("Desktop shortcut", false).toBool());
+        msiOptions << QString("QUICKSTART=%1").arg(getConfig("Enable Quickstarter by default", false).toBool());
 
         qDebug() << "MSI options:" << msiOptions;
 
