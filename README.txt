@@ -4,13 +4,24 @@ The Installer Jukebox
 What is it?
 
 The Installer Jukebox generates fully automated and customized installers for
-several Windows applications, suitable for automatic and unattended deployment.
-Supported packages are:
+several Windows applications, suitable for automatic and unattended deployment,
+or just for frequent reinstallation for personal use. Supported packages are:
 
+- Adobe Reader
 - Flash Player ActiveX
 - Flash Player Plugin
+- LibreOffice
 - Opera
 - VLC Media Player
+
+
+How it works
+
+The original installer gets downloaded at runtime directly from the official
+download site or an official mirror - no redistribution from shady origins as
+sometimes found on the web. Then some NSIS source code is generated and compiled
+that bundles the original installer and performs the unattended installation and
+customization of the package.
 
 
 Requirements
@@ -19,9 +30,9 @@ Requirements
 - NSIS (http://nsis.sourceforge.net) for generating installers
 - For VLC Media Player: a 7z extraction utility, like http://7-zip.org
 
-While the generated installers are only useful in a Windows environment, the
-Installer Jukebox itself can run under any OS supported by Qt and NSIS -
-Windows, Linux and MacOS.
+While the generated installers are only useful in a Windows or WINE environment,
+the Installer Jukebox itself can natively run under any OS supported by Qt and
+NSIS - Windows, Linux and MacOS.
 
 
 Compiling
@@ -50,15 +61,16 @@ in the file.
 
 Generating installers
 
-Start the application, select the package and click "Build". If everything went
-fine, you now have a customized installer in the configured location.
+Start the application, select the package (and the version number if required)
+and click "Build". If everything went fine, you now have a customized installer
+in the configured location.
 
 
 Running the installer
 
-Just start the installer like any other installer. It will only show an an page
-and then perform the installation without further questions, according to your
-configuration.
+Just start the installer like any other installer. It will only show an
+introduction page and then perform the installation without further questions,
+according to your configuration.
 For fully automated, non-interactive installations start the installer from the
 command line with the /S switch:
 
