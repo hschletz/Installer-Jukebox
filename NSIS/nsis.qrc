@@ -20,5 +20,6 @@
         <file>Thunderbird/writeprefs.nsh</file>
         <file>Mozilla/local-settings.js</file>
         <file>Thunderbird/uninstalltestpilot.nsh</file>
+        <file>Thunderbird/accountconfig.nsh</file>
     </qresource>
 </RCC>

@@ -74,7 +74,8 @@ OTHER_FILES += \
     NSIS/Thunderbird/deleteprefs.nsh \
     NSIS/Thunderbird/writeprefs.nsh \
     NSIS/Mozilla/local-settings.js \
-    NSIS/Thunderbird/uninstalltestpilot.nsh
+    NSIS/Thunderbird/uninstalltestpilot.nsh \
+    NSIS/Thunderbird/accountconfig.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

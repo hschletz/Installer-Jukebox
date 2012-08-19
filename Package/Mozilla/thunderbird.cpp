@@ -23,6 +23,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <QFileInfo>
 #include "application.h"
 #include "thunderbird.h"
 
@@ -35,6 +36,8 @@ Thunderbird::Thunderbird() :
 void Thunderbird::build(NSIS *installer, Version version)
 {
     isError = false;
+
+    QStringList files;
 
     QString src(loadResource(":NSIS/Thunderbird/main.nsh"));
     src.replace("${Version}", version);
@@ -63,18 +66,26 @@ void Thunderbird::build(NSIS *installer, Version version)
         src += loadResource(":NSIS/Thunderbird/uninstalltestpilot.nsh");
     }
 
+    QString accountConfig(getConfig("Account configuration file").toString());
+    if (!accountConfig.isEmpty()) {
+        src += loadResource(":NSIS/Thunderbird/accountconfig.nsh")
+                .replace("${AccountConfig}", QFileInfo(accountConfig).fileName());
+        files << accountConfig;
+    }
+
     if (!isError) {
         download(version);
     }
 
     if (!isError) {
+        files << tempFiles;
         installer->build(
                     objectName(),
                     getOutputFile(),
                     NSIS::None,
                     80,
                     QStringList("thunderbird.exe"),
-                    tempFiles,
+                    files,
                     src
                     );
     }
