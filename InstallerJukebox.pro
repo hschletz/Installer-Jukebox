@@ -27,7 +27,9 @@ SOURCES += main.cpp\
     Package/vlcmediaplayer.cpp \
     Package/opera.cpp \
     Package/adobereader.cpp \
-    Package/libreoffice.cpp
+    Package/libreoffice.cpp \
+    Package/Mozilla/mozilla.cpp \
+    Package/Mozilla/thunderbird.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -43,7 +45,9 @@ HEADERS  += dialog.h \
     Package/vlcmediaplayer.h \
     Package/opera.h \
     Package/adobereader.h \
-    Package/libreoffice.h
+    Package/libreoffice.h \
+    Package/Mozilla/mozilla.h \
+    Package/Mozilla/thunderbird.h
 
 FORMS    += dialog.ui \
     command.ui
@@ -65,7 +69,12 @@ OTHER_FILES += \
     NSIS/AdobeReader/installpatch.nsh \
     NSIS/AdobeReader/disableupdater.nsh \
     NSIS/LibreOffice/main.nsh \
-    NSIS/LibreOffice/configtemplate.nsh
+    NSIS/LibreOffice/configtemplate.nsh \
+    NSIS/Thunderbird/main.nsh \
+    NSIS/Thunderbird/deleteprefs.nsh \
+    NSIS/Thunderbird/writeprefs.nsh \
+    NSIS/Mozilla/local-settings.js \
+    NSIS/Thunderbird/uninstalltestpilot.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

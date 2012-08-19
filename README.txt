@@ -12,6 +12,7 @@ or just for frequent reinstallation for personal use. Supported packages are:
 - Flash Player Plugin
 - LibreOffice
 - Opera
+- Thunderbird
 - VLC Media Player
 
 

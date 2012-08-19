@@ -2,4 +2,5 @@
 README.txt text eol=crlf
 LICENSE text eol=crlf
 *.ini text eol=crlf
+NSIS/Mozilla/local-settings.js text eol=crlf
 *.dll binary

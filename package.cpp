@@ -37,6 +37,7 @@
 #include "Package/flashplayeractivex.h"
 #include "Package/libreoffice.h"
 #include "Package/opera.h"
+#include "Package/Mozilla/thunderbird.h"
 #include "Package/vlcmediaplayer.h"
 
 Package::Package(const char *name, const char *minVersion) :
@@ -73,6 +74,8 @@ QMap<QString, Package *> Package::getPackages()
             package = new LibreOffice();
         } else if (packageName.compare("Opera", Qt::CaseInsensitive) == 0) {
             package = new Opera();
+        } else if (packageName.compare("Thunderbird", Qt::CaseInsensitive) == 0) {
+            package = new Thunderbird();
         } else if (packageName.compare("VLC Media Player", Qt::CaseInsensitive) == 0) {
             package = new VlcMediaPlayer();
         } else if (!packageName.startsWith("installer_")) { // "installer_*" are special sections, not a package

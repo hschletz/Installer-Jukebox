@@ -15,5 +15,10 @@
         <file>AdobeReader/disableupdater.nsh</file>
         <file>LibreOffice/main.nsh</file>
         <file>LibreOffice/configtemplate.nsh</file>
+        <file>Thunderbird/main.nsh</file>
+        <file>Thunderbird/deleteprefs.nsh</file>
+        <file>Thunderbird/writeprefs.nsh</file>
+        <file>Mozilla/local-settings.js</file>
+        <file>Thunderbird/uninstalltestpilot.nsh</file>
     </qresource>
 </RCC>
