@@ -54,6 +54,9 @@ void Thunderbird::build(NSIS *installer, Version version)
     prefs += setOption("Compose HTML messages", boolean, "mail.identity.default.compose_html");
     prefs += setOption("Enable file sharing", boolean, "mail.cloud_files.enabled");
     prefs += setOption("Offer file sharing", boolean, "mail.compose.big_attachments.notify");
+    if (!getConfig("Show upgrade page", true).toBool()) {
+        prefs += "lockPref(\"mailnews.start_page_override.mstone\", \"ignore\");\r\n";
+    }
 
     if (prefs.isEmpty()) {
         src += loadResource(":NSIS/Thunderbird/deleteprefs.nsh");
