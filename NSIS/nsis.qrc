@@ -21,5 +21,9 @@
         <file>Mozilla/local-settings.js</file>
         <file>Thunderbird/uninstalltestpilot.nsh</file>
         <file>Thunderbird/accountconfig.nsh</file>
+        <file>Firefox/deleteprefs.nsh</file>
+        <file>Firefox/main.nsh</file>
+        <file>Firefox/writeprefs.nsh</file>
+        <file>Firefox/uninstallmaintenanceservice.nsh</file>
     </qresource>
 </RCC>

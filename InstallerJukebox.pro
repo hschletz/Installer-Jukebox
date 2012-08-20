@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     Package/adobereader.cpp \
     Package/libreoffice.cpp \
     Package/Mozilla/mozilla.cpp \
-    Package/Mozilla/thunderbird.cpp
+    Package/Mozilla/thunderbird.cpp \
+    Package/Mozilla/firefox.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -47,7 +48,8 @@ HEADERS  += dialog.h \
     Package/adobereader.h \
     Package/libreoffice.h \
     Package/Mozilla/mozilla.h \
-    Package/Mozilla/thunderbird.h
+    Package/Mozilla/thunderbird.h \
+    Package/Mozilla/firefox.h
 
 FORMS    += dialog.ui \
     command.ui
@@ -75,7 +77,11 @@ OTHER_FILES += \
     NSIS/Thunderbird/writeprefs.nsh \
     NSIS/Mozilla/local-settings.js \
     NSIS/Thunderbird/uninstalltestpilot.nsh \
-    NSIS/Thunderbird/accountconfig.nsh
+    NSIS/Thunderbird/accountconfig.nsh \
+    NSIS/Firefox/main.nsh \
+    NSIS/Firefox/deleteprefs.nsh \
+    NSIS/Firefox/writeprefs.nsh \
+    NSIS/Firefox/uninstallmaintenanceservice.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

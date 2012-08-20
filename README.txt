@@ -8,6 +8,7 @@ several Windows applications, suitable for automatic and unattended deployment,
 or just for frequent reinstallation for personal use. Supported packages are:
 
 - Adobe Reader
+- Firefox
 - Flash Player ActiveX
 - Flash Player Plugin
 - LibreOffice

@@ -33,6 +33,7 @@
 #include "installer.h"
 #include "package.h"
 #include "Package/adobereader.h"
+#include "Package/Mozilla/firefox.h"
 #include "Package/flashplayerplugin.h"
 #include "Package/flashplayeractivex.h"
 #include "Package/libreoffice.h"
@@ -66,6 +67,8 @@ QMap<QString, Package *> Package::getPackages()
         package = 0;
         if (packageName.compare("Adobe Reader", Qt::CaseInsensitive) == 0) {
             package = new AdobeReader();
+        } else if (packageName.compare("Firefox", Qt::CaseInsensitive) == 0) {
+            package = new Firefox();
         } else if (packageName.compare("Flash Player Plugin", Qt::CaseInsensitive) == 0) {
             package = new FlashPlayerPlugin();
         } else if (packageName.compare("Flash Player ActiveX", Qt::CaseInsensitive) == 0) {
