@@ -86,9 +86,10 @@ protected:
      * @brief Generate code for preferences file
      *
      * The base implemantation provides support for common options available in
-     * all Mozilla products:
+     * all %Mozilla products:
      *
      * - Proxy configuration script
+     * - Enable geolocation
      *
      * Subclasses should extend this function with package specific options.
      * @return QString
