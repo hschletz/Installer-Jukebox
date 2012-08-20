@@ -62,6 +62,7 @@ QString Mozilla::getPrefs()
 {
     QString prefs;
     prefs += setOption("Proxy configuration script", &Mozilla::setProxyScript);
+    prefs += setOption("Enable geolocation", boolean, "geo.enabled");
     return prefs;
 }
 
