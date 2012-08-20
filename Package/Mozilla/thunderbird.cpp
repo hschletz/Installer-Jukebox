@@ -42,21 +42,7 @@ void Thunderbird::build(NSIS *installer, Version version)
     QString src(loadResource(":NSIS/Thunderbird/main.nsh"));
     src.replace("${Version}", version);
 
-    QString prefs;
-    prefs += setOption("Use automatic update", boolean, "app.update.enabled");
-    prefs += setOption("Allow message cache", (setOptionCallback) &Thunderbird::setDisableCache);
-    prefs += setOption("Browser cache size", integer, "browser.cache.disk.capacity");
-    prefs += setOption("Proxy configuration script", (setOptionCallback) &Thunderbird::setProxyScript);
-    prefs += setOption("Show start page", boolean, "mailnews.start_page.enabled");
-    prefs += setOption("Display names from address book only", boolean, "mail.showCondensedAddresses");
-    prefs += setOption("Request MDN", boolean, "mail.receipt.request_return_receipt_on");
-    prefs += setOption("Reply MDN", boolean, "mail.mdn.report.enabled");
-    prefs += setOption("Compose HTML messages", boolean, "mail.identity.default.compose_html");
-    prefs += setOption("Enable file sharing", boolean, "mail.cloud_files.enabled");
-    prefs += setOption("Offer file sharing", boolean, "mail.compose.big_attachments.notify");
-    if (!getConfig("Show upgrade page", true).toBool()) {
-        prefs += "lockPref(\"mailnews.start_page_override.mstone\", \"ignore\");\r\n";
-    }
+    QString prefs(getPrefs());
 
     if (prefs.isEmpty()) {
         src += loadResource(":NSIS/Thunderbird/deleteprefs.nsh");
@@ -97,11 +83,25 @@ void Thunderbird::build(NSIS *installer, Version version)
 }
 
 
-QString Thunderbird::setProxyScript(QString cmdTemplate, QVariant value)
+QString Thunderbird::getPrefs()
 {
-    return
-            cmdTemplate.arg("network.proxy.type").arg(2) +
-            cmdTemplate.arg("network.proxy.autoconfig_url").arg(quoteString(value.toString()));
+    QString prefs(Mozilla::getPrefs());
+
+    prefs += setOption("Use automatic update", boolean, "app.update.enabled");
+    prefs += setOption("Allow message cache", (setOptionCallback) &Thunderbird::setDisableCache);
+    prefs += setOption("Browser cache size", integer, "browser.cache.disk.capacity");
+    prefs += setOption("Show start page", boolean, "mailnews.start_page.enabled");
+    prefs += setOption("Display names from address book only", boolean, "mail.showCondensedAddresses");
+    prefs += setOption("Request MDN", boolean, "mail.receipt.request_return_receipt_on");
+    prefs += setOption("Reply MDN", boolean, "mail.mdn.report.enabled");
+    prefs += setOption("Compose HTML messages", boolean, "mail.identity.default.compose_html");
+    prefs += setOption("Enable file sharing", boolean, "mail.cloud_files.enabled");
+    prefs += setOption("Offer file sharing", boolean, "mail.compose.big_attachments.notify");
+    if (!getConfig("Show upgrade page", true).toBool()) {
+        prefs += "lockPref(\"mailnews.start_page_override.mstone\", \"ignore\");\r\n";
+    }
+
+    return prefs;
 }
 
 

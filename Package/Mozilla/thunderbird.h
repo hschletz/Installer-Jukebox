@@ -44,15 +44,11 @@ public:
 
     void build(NSIS *installer, Version version);
 
-private:
+protected:
 
-    /**
-     * @brief Callback for setting a proxy script
-     * @param cmdTemplate
-     * @param value
-     * @return QString
-     */
-    QString setProxyScript(QString cmdTemplate, QVariant value);
+    QString getPrefs();
+
+private:
 
     /**
      * @brief Callback for disabling offline cache

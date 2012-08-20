@@ -83,6 +83,19 @@ protected:
     void download(Version version);
 
     /**
+     * @brief Generate code for preferences file
+     *
+     * The base implemantation provides support for common options available in
+     * all Mozilla products:
+     *
+     * - Proxy configuration script
+     *
+     * Subclasses should extend this function with package specific options.
+     * @return QString
+     */
+    virtual QString getPrefs();
+
+    /**
      * @brief Set/delete preferences
      * @param name Option name in the %Installer Jukebox config file
      * @param type Value's datatype
@@ -119,6 +132,17 @@ protected:
      * @param prefs Content of preferences file. The required initial comment line is prepended.
      */
     void writePrefsFile(QString prefs);
+
+private:
+
+    /**
+     * @brief Callback for setting a proxy script
+     * @param cmdTemplate
+     * @param value
+     * @return QString
+     */
+    QString setProxyScript(QString cmdTemplate, QVariant value);
+
 };
 
 #endif // MOZILLA_H

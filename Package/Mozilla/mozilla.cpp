@@ -58,6 +58,14 @@ void Mozilla::download(Version version)
 }
 
 
+QString Mozilla::getPrefs()
+{
+    QString prefs;
+    prefs += setOption("Proxy configuration script", &Mozilla::setProxyScript);
+    return prefs;
+}
+
+
 QString Mozilla::setOption(QString name, optionType type, QString jsName)
 {
     QString cmd;
@@ -146,4 +154,12 @@ void Mozilla::writePrefsFile(QString prefs)
         isError = true;
         Application::critical(tr("Error opening '%1'").arg(fileName));
     }
+}
+
+
+QString Mozilla::setProxyScript(QString cmdTemplate, QVariant value)
+{
+    return
+            cmdTemplate.arg("network.proxy.type").arg(2) +
+            cmdTemplate.arg("network.proxy.autoconfig_url").arg(quoteString(value.toString()));
 }
