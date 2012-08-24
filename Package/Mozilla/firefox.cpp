@@ -77,16 +77,8 @@ QString Firefox::getPrefs()
     QString prefs(Mozilla::getPrefs());
 
     prefs += setOption("Use automatic update", (setOptionCallback) &Firefox::setAutoUpdate);
-//    prefs += setOption("Allow message cache", (setOptionCallback) &Thunderbird::setDisableCache);
     prefs += setOption("Disk cache size", integer, "browser.cache.disk.capacity");
     prefs += setOption("Ask for download directory", boolean_inverted, "browser.download.useDownloadDir");
-//    prefs += setOption("Show start page", boolean, "mailnews.start_page.enabled"); //true
-//    prefs += setOption("Display names from address book only", boolean, "mail.showCondensedAddresses"); //true
-//    prefs += setOption("Request MDN", boolean, "mail.receipt.request_return_receipt_on"); //?
-//    prefs += setOption("Reply MDN", boolean, "mail.mdn.report.enabled"); // true
-//    prefs += setOption("Compose HTML messages", boolean, "mail.identity.default.compose_html"); //true
-//    prefs += setOption("Enable file sharing", boolean, "mail.cloud_files.enabled"); // true
-//    prefs += setOption("Offer file sharing", boolean, "mail.compose.big_attachments.notify"); // true
     if (!getConfig("Show upgrade page", true).toBool()) {
         prefs += "lockPref(\"browser.startup.homepage_override.mstone\", \"ignore\");\r\n";
     }
