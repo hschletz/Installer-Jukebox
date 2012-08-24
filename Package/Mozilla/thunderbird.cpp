@@ -67,6 +67,7 @@ void Thunderbird::build(NSIS *installer, Version version)
     }
 
     if (!isError) {
+        createInstallerIni();
         files << tempFiles;
         installer->build(
                     objectName(),

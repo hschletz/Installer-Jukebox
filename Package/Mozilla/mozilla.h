@@ -83,6 +83,15 @@ protected:
     void download(Version version);
 
     /**
+     * @brief Create INI file to pass to installer
+     *
+     * This creates a temporary file mozilla.ini which should be passed to the
+     * original installer via the /INI= option. It gets populated with values
+     * from the package's configuration or defaults.
+     */
+    void createInstallerIni();
+
+    /**
      * @brief Generate code for preferences file
      *
      * The base implemantation provides support for common options available in

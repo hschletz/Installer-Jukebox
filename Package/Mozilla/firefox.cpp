@@ -56,6 +56,7 @@ void Firefox::build(NSIS *installer, Version version)
     }
 
     if (!isError) {
+        createInstallerIni();
         installer->build(
                     objectName(),
                     getOutputFile(),

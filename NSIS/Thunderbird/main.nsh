@@ -1,3 +1,3 @@
 # Thunderbird
 
-    ExecWait '"$PLUGINSDIR\Thunderbird Setup ${Version}.exe" -ms'
+    ExecWait '"$PLUGINSDIR\Thunderbird Setup ${Version}.exe" /INI="$PLUGINSDIR\mozilla.ini"'

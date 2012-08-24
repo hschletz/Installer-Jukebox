@@ -25,6 +25,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QSettings>
 #include <QTextStream>
 #include "application.h"
 #include "downloader.h"
@@ -55,6 +56,19 @@ void Mozilla::download(Version version)
     } else {
         tempFiles << target;
     }
+}
+
+
+void Mozilla::createInstallerIni()
+{
+    QString iniFileName(Application::getTmpDir() + "/mozilla.ini");
+    QSettings iniFile(iniFileName, QSettings::IniFormat);
+
+    iniFile.setValue("Install/DesktopShortcut", getConfig("Desktop shortcut", true).toBool());
+    iniFile.setValue("Install/QuickLaunchShortcut", getConfig("Quick launch shortcut", true).toBool());
+    iniFile.setValue("Install/StartMenuShortcuts", getConfig("Start menu shortcut", true).toBool());
+
+    tempFiles << iniFileName;
 }
 
 
