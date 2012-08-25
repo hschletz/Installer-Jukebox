@@ -11,6 +11,7 @@ QT       += core gui network
 TARGET = InstallerJukebox
 TEMPLATE = app
 
+LIBS += -lquazip
 
 SOURCES += main.cpp\
         dialog.cpp \
@@ -30,7 +31,8 @@ SOURCES += main.cpp\
     Package/libreoffice.cpp \
     Package/Mozilla/mozilla.cpp \
     Package/Mozilla/thunderbird.cpp \
-    Package/Mozilla/firefox.cpp
+    Package/Mozilla/firefox.cpp \
+    Package/ocsinventoryngagent.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -49,7 +51,8 @@ HEADERS  += dialog.h \
     Package/libreoffice.h \
     Package/Mozilla/mozilla.h \
     Package/Mozilla/thunderbird.h \
-    Package/Mozilla/firefox.h
+    Package/Mozilla/firefox.h \
+    Package/ocsinventoryngagent.h
 
 FORMS    += dialog.ui \
     command.ui
@@ -81,7 +84,9 @@ OTHER_FILES += \
     NSIS/Firefox/main.nsh \
     NSIS/Firefox/deleteprefs.nsh \
     NSIS/Firefox/writeprefs.nsh \
-    NSIS/Firefox/uninstallmaintenanceservice.nsh
+    NSIS/Firefox/uninstallmaintenanceservice.nsh \
+    NSIS/OcsInventoryNgAgent/main.nsh \
+    NSIS/OcsInventoryNgAgent/installcert.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

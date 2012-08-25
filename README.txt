@@ -12,6 +12,7 @@ or just for frequent reinstallation for personal use. Supported packages are:
 - Flash Player ActiveX
 - Flash Player Plugin
 - LibreOffice
+- OCS Inventory NG agent
 - Opera
 - Thunderbird
 - VLC Media Player
@@ -29,6 +30,7 @@ customization of the package.
 Requirements
 
 - Qt SDK (http://qt-project.org) for compiling the application
+- QuaZIP (http://quazip.sourceforge.net)
 - NSIS (http://nsis.sourceforge.net) for generating installers
 - For VLC Media Player: a 7z extraction utility, like http://7-zip.org
 

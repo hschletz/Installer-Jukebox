@@ -37,6 +37,7 @@
 #include "Package/flashplayerplugin.h"
 #include "Package/flashplayeractivex.h"
 #include "Package/libreoffice.h"
+#include "Package/ocsinventoryngagent.h"
 #include "Package/opera.h"
 #include "Package/Mozilla/thunderbird.h"
 #include "Package/vlcmediaplayer.h"
@@ -75,6 +76,8 @@ QMap<QString, Package *> Package::getPackages()
             package = new FlashPlayerActiveX();
         } else if (packageName.compare("LibreOffice", Qt::CaseInsensitive) == 0) {
             package = new LibreOffice();
+        } else if (packageName.compare("OCS Inventory NG agent", Qt::CaseInsensitive) == 0) {
+            package = new OcsInventoryNgAgent();
         } else if (packageName.compare("Opera", Qt::CaseInsensitive) == 0) {
             package = new Opera();
         } else if (packageName.compare("Thunderbird", Qt::CaseInsensitive) == 0) {
