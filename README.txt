@@ -63,6 +63,12 @@ directory as the executable file. A template file
 in the file.
 
 
+Proxy support
+
+The application uses the system's default proxy settings, as documented at
+http://qt-project.org/doc/qt-4.8/qnetworkproxyfactory.html#systemProxyForQuery
+
+
 Generating installers
 
 Start the application, select the package (and the version number if required)

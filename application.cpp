@@ -26,6 +26,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
+#include <QNetworkProxyFactory>
 
 Application::Application(int &argc, char **argv) :
     QApplication(argc, argv)
@@ -81,6 +82,9 @@ Application::Application(int &argc, char **argv) :
         critical(tr("'Keep temp files' setting is invalid!"));
         throw 1;
     }
+
+    // Use system's default proxy configuration
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
 }
 
 
