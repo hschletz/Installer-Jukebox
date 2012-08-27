@@ -43,7 +43,7 @@ class Downloader : public QObject
 {
     Q_OBJECT
 
-public:
+protected:
 
     /**
      * @brief Constructs downloader, generating target path
@@ -73,8 +73,10 @@ public:
      */
     virtual ~Downloader();
 
+public:
+
     /**
-     * @brief Download a file (recommended method)
+     * @brief Download a file (public method)
      *
      * Arguments are assumed to be valid - validate before calling this!
      * If the target file already exists, a confirmation dialog is displayed.
@@ -86,6 +88,8 @@ public:
      * @return QString Full path of downloaded file, or empty on error
      */
     static QString get(QString sourceUrl, QString targetDir, QString filename="", QString userAgent="");
+
+protected:
 
     /**
      * @brief Initiate download
@@ -102,7 +106,7 @@ public:
      */
     QString download(int maxRedirects);
 
-public slots:
+protected slots:
 
     /**
      * @brief Finish download, clean up
