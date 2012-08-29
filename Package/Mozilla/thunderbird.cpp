@@ -92,6 +92,7 @@ QString Thunderbird::getPrefs()
     prefs += setOption("Allow message cache", (setOptionCallback) &Thunderbird::setDisableCache);
     prefs += setOption("Browser cache size", integer, "browser.cache.disk.capacity");
     prefs += setOption("Show start page", boolean, "mailnews.start_page.enabled");
+    prefs += setOption("Autohide tab bar", boolean, "mail.tabs.autoHide");
     prefs += setOption("Display names from address book only", boolean, "mail.showCondensedAddresses");
     prefs += setOption("Request MDN", boolean, "mail.receipt.request_return_receipt_on");
     prefs += setOption("Reply MDN", boolean, "mail.mdn.report.enabled");
