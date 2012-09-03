@@ -32,7 +32,9 @@ SOURCES += main.cpp\
     Package/Mozilla/mozilla.cpp \
     Package/Mozilla/thunderbird.cpp \
     Package/Mozilla/firefox.cpp \
-    Package/ocsinventoryngagent.cpp
+    Package/ocsinventoryngagent.cpp \
+    Package/javaruntimeenvironment6.cpp \
+    manualdownload.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -52,10 +54,13 @@ HEADERS  += dialog.h \
     Package/Mozilla/mozilla.h \
     Package/Mozilla/thunderbird.h \
     Package/Mozilla/firefox.h \
-    Package/ocsinventoryngagent.h
+    Package/ocsinventoryngagent.h \
+    Package/javaruntimeenvironment6.h \
+    manualdownload.h
 
 FORMS    += dialog.ui \
-    command.ui
+    command.ui \
+    manualdownload.ui
 
 OTHER_FILES += \
     NSIS/main.nsi \
@@ -86,7 +91,10 @@ OTHER_FILES += \
     NSIS/Firefox/writeprefs.nsh \
     NSIS/Firefox/uninstallmaintenanceservice.nsh \
     NSIS/OcsInventoryNgAgent/main.nsh \
-    NSIS/OcsInventoryNgAgent/installcert.nsh
+    NSIS/OcsInventoryNgAgent/installcert.nsh \
+    NSIS/JavaRuntimeEnvironment6/main.nsh \
+    NSIS/JavaRuntimeEnvironment6/disablequickstarter.nsh \
+    NSIS/JavaRuntimeEnvironment6/disableautoupdate.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

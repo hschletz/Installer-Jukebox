@@ -27,5 +27,8 @@
         <file>Firefox/uninstallmaintenanceservice.nsh</file>
         <file>OcsInventoryNgAgent/main.nsh</file>
         <file>OcsInventoryNgAgent/installcert.nsh</file>
+        <file>JavaRuntimeEnvironment6/main.nsh</file>
+        <file>JavaRuntimeEnvironment6/disablequickstarter.nsh</file>
+        <file>JavaRuntimeEnvironment6/disableautoupdate.nsh</file>
     </qresource>
 </RCC>
