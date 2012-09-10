@@ -120,6 +120,16 @@ QVariant Application::getConfig(const QString & key, const QVariant & defaultVal
 }
 
 
+QStringList Application::getConfigGroupKeys(QString group)
+{
+    QSettings *settings = ((Application *) qApp)->config;
+    settings->beginGroup(group);
+    QStringList keys(settings->allKeys());
+    settings->endGroup();
+    return keys;
+}
+
+
 QStringList Application::getConfigGroups()
 {
     return ((Application *) qApp)->config->childGroups();

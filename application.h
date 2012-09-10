@@ -98,6 +98,13 @@ public:
     static QVariant getConfig(const QString &key, const QVariant &defaultValue = QVariant());
 
     /**
+     * @brief Get all keys from a specific group
+     * @param group
+     * @return QStringList
+     */
+    static QStringList getConfigGroupKeys(QString group);
+
+    /**
      * @brief Return a list of all sections in the config file
      * @return QStringList
      */

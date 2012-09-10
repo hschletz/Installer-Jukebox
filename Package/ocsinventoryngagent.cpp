@@ -65,6 +65,17 @@ void OcsInventoryNgAgent::build(NSIS *installer, Version version)
             files << cacert;
         }
 
+        // Iterate over all options starting with "Plugin". Their value will be
+        // used as a path to a plugin which gets bundled with the installer.
+        QString pluginKey;
+        foreach (pluginKey, Application::getConfigGroupKeys(objectName()).filter(QRegExp("^Plugin", Qt::CaseInsensitive)))
+        {
+            QString plugin(getConfig(pluginKey).toString());
+            src += loadResource(":NSIS/OcsInventoryNgAgent/installplugin.nsh")
+                    .replace("${Plugin}", QFileInfo(plugin).fileName());
+            files << plugin;
+        }
+
         installer->build(
                     objectName(),
                     getOutputFile(),

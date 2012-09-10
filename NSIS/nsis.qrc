@@ -30,5 +30,6 @@
         <file>JavaRuntimeEnvironment6/main.nsh</file>
         <file>JavaRuntimeEnvironment6/disablequickstarter.nsh</file>
         <file>JavaRuntimeEnvironment6/disableautoupdate.nsh</file>
+        <file>OcsInventoryNgAgent/installplugin.nsh</file>
     </qresource>
 </RCC>

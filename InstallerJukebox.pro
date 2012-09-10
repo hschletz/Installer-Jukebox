@@ -94,7 +94,8 @@ OTHER_FILES += \
     NSIS/OcsInventoryNgAgent/installcert.nsh \
     NSIS/JavaRuntimeEnvironment6/main.nsh \
     NSIS/JavaRuntimeEnvironment6/disablequickstarter.nsh \
-    NSIS/JavaRuntimeEnvironment6/disableautoupdate.nsh
+    NSIS/JavaRuntimeEnvironment6/disableautoupdate.nsh \
+    NSIS/OcsInventoryNgAgent/installplugin.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc
