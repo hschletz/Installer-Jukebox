@@ -31,5 +31,8 @@
         <file>JavaRuntimeEnvironment6/disablequickstarter.nsh</file>
         <file>JavaRuntimeEnvironment6/disableautoupdate.nsh</file>
         <file>OcsInventoryNgAgent/installplugin.nsh</file>
+        <file>InfraRecorder/main.nsh</file>
+        <file>InfraRecorder/header.nsh</file>
+        <file>InfraRecorder/setversion.nsh</file>
     </qresource>
 </RCC>

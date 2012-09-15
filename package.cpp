@@ -36,6 +36,7 @@
 #include "Package/Mozilla/firefox.h"
 #include "Package/flashplayerplugin.h"
 #include "Package/flashplayeractivex.h"
+#include "Package/infrarecorder.h"
 #include "Package/javaruntimeenvironment6.h"
 #include "Package/libreoffice.h"
 #include "Package/ocsinventoryngagent.h"
@@ -75,6 +76,8 @@ QMap<QString, Package *> Package::getPackages()
             package = new FlashPlayerPlugin();
         } else if (packageName.compare("Flash Player ActiveX", Qt::CaseInsensitive) == 0) {
             package = new FlashPlayerActiveX();
+        } else if (packageName.compare("InfraRecorder", Qt::CaseInsensitive) == 0) {
+            package = new InfraRecorder();
         } else if (packageName.compare("Java Runtime Environment 6", Qt::CaseInsensitive) == 0) {
             package = new JavaRuntimeEnvironment6();
         } else if (packageName.compare("LibreOffice", Qt::CaseInsensitive) == 0) {

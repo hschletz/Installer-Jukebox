@@ -11,6 +11,7 @@ or just for frequent reinstallation for personal use. Supported packages are:
 - Firefox
 - Flash Player ActiveX
 - Flash Player Plugin
+- InfraRecorder
 - Java Runtime Environment 6
 - LibreOffice
 - OCS Inventory NG agent
