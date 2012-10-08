@@ -23,7 +23,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <QDebug>
 #include <QFile>
 #include <QSettings>
 #include <QTextStream>
@@ -67,6 +66,13 @@ void Mozilla::createInstallerIni()
     iniFile.setValue("Install/DesktopShortcut", getConfig("Desktop shortcut", true).toBool());
     iniFile.setValue("Install/QuickLaunchShortcut", getConfig("Quick launch shortcut", true).toBool());
     iniFile.setValue("Install/StartMenuShortcuts", getConfig("Start menu shortcut", true).toBool());
+
+    // Check option with and without asterisk.
+    QVariant autoUpdate(getConfig("Use automatic update*"));
+    if (!autoUpdate.isValid()) {
+        autoUpdate = getConfig("Use automatic update", true);
+    }
+    iniFile.setValue("Install/MaintenanceService", autoUpdate.toBool());
 
     tempFiles << iniFileName;
 }

@@ -91,7 +91,6 @@ OTHER_FILES += \
     NSIS/Firefox/main.nsh \
     NSIS/Firefox/deleteprefs.nsh \
     NSIS/Firefox/writeprefs.nsh \
-    NSIS/Firefox/uninstallmaintenanceservice.nsh \
     NSIS/OcsInventoryNgAgent/main.nsh \
     NSIS/OcsInventoryNgAgent/installcert.nsh \
     NSIS/JavaRuntimeEnvironment6/main.nsh \

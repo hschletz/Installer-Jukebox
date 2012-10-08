@@ -26,7 +26,7 @@
 #include "firefox.h"
 
 Firefox::Firefox() :
-    Mozilla("Firefox", "14.0")
+    Mozilla("Firefox", "16.0")
 {
 }
 
@@ -45,10 +45,6 @@ void Firefox::build(NSIS *installer, Version version)
     } else {
         src += loadResource(":NSIS/Firefox/writeprefs.nsh");
         writePrefsFile(prefs);
-    }
-
-    if (!autoUpdate) {
-        src += loadResource(":NSIS/Firefox/uninstallmaintenanceservice.nsh");
     }
 
     if (!isError) {
@@ -74,10 +70,9 @@ void Firefox::build(NSIS *installer, Version version)
 
 QString Firefox::getPrefs()
 {
-    autoUpdate = true;
     QString prefs(Mozilla::getPrefs());
 
-    prefs += setOption("Use automatic update", (setOptionCallback) &Firefox::setAutoUpdate);
+    prefs += setOption("Use automatic update", boolean, "app.update.enabled");
     prefs += setOption("Disk cache size", integer, "browser.cache.disk.capacity");
     prefs += setOption("Ask for download directory", boolean_inverted, "browser.download.useDownloadDir");
     if (!getConfig("Show upgrade page", true).toBool()) {
@@ -85,11 +80,4 @@ QString Firefox::getPrefs()
     }
 
     return prefs;
-}
-
-
-QString Firefox::setAutoUpdate(QString cmdTemplate, QVariant value)
-{
-    autoUpdate = value.toBool();
-    return cmdTemplate.arg("app.update.enabled").arg(autoUpdate ? "true" : "false");
 }

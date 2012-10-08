@@ -48,25 +48,6 @@ protected:
 
     QString getPrefs();
 
-private:
-
-    /**
-     * @brief Disable autoupdater if requested
-     *
-     * This generates a prefs entry if requested and sets the autoUpdate member.
-     * @param cmdTemplate
-     * @param value
-     * @return QString
-     */
-    QString setAutoUpdate(QString cmdTemplate, QVariant value);
-
-    /**
-     * @brief Flag that indicates if autoupdate is enabled.
-     * This should be evaluated by build() to uninstall the Mozilla Maintenance
-     * Service.
-     */
-    bool autoUpdate;
-
 };
 
 #endif // FIREFOX_H
