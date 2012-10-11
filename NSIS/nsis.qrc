@@ -24,7 +24,6 @@
         <file>Firefox/deleteprefs.nsh</file>
         <file>Firefox/main.nsh</file>
         <file>Firefox/writeprefs.nsh</file>
-        <file>Firefox/uninstallmaintenanceservice.nsh</file>
         <file>OcsInventoryNgAgent/main.nsh</file>
         <file>OcsInventoryNgAgent/installcert.nsh</file>
         <file>JavaRuntimeEnvironment6/main.nsh</file>
