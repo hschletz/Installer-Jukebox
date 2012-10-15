@@ -55,12 +55,12 @@ Version Version::truncate(uint length)
 }
 
 
-Version Version::pad(uint length)
+Version Version::pad(uint length, QString padString)
 {
     QStringList parts(split());
     parts.reserve(length);
     while ((uint) parts.size() < length) {
-        parts << "0";
+        parts << padString;
     }
     return parts.join(".");
 }

@@ -70,11 +70,12 @@ public:
     Version truncate(uint length);
 
     /**
-     * @brief Return version zero-padded to the given length ("a.b", 3 => "a.b.0")
+     * @brief Return version padded to the given length ("a.b", 3 => "a.b.0")
      * @param length New length. If the current length is equal or longer, the unmodified version is returned.
+     * @param padString String to use as padding. Default: "0".
      * @return Version
      */
-    Version pad(uint length);
+    Version pad(uint length, QString padString = "0");
 
     /**
      * @brief Return version with a component replaced by another string ("a.b.c", 3, "x" => "a.b.x")

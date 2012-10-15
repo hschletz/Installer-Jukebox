@@ -109,7 +109,12 @@ void AdobeReader::build(NSIS *installer, Version version)
 void AdobeReader::download(Version version)
 {
     // MSI version always has 2 parts (10.0, 10.1...)
-    Version msiVersion(version.truncate(2).pad(2));
+    Version msiVersion;
+    if (version.part(1).toInt() >= 11) {
+        msiVersion = version.pad(2).pad(3, "00");
+    } else {
+        msiVersion = version.truncate(2).pad(2);
+    }
     qDebug() << "MSI version" << msiVersion.toString();
 
     QString language(getConfig("Language", "en_US").toString());
@@ -119,7 +124,7 @@ void AdobeReader::download(Version version)
     QString msiUrl("http://ardownload.adobe.com/pub/adobe/reader/win/%1/%2/%4/AdbeRdr%3_%4.msi");
     msiFile = Downloader::get(
                 msiUrl
-                .arg(msiVersion.replace(2, "x"))
+                .arg(msiVersion.truncate(2).replace(2, "x"))
                 .arg(msiVersion.pad(3))
                 .arg(msiVersion.pad(3).stripDots())
                 .arg(language),
