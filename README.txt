@@ -32,7 +32,7 @@ customization of the package.
 Requirements
 
 - Qt SDK (http://qt-project.org) for compiling the application
-- QuaZIP (http://quazip.sourceforge.net)
+- QuaZIP (http://quazip.sourceforge.net) for compiling the application
 - NSIS (http://nsis.sourceforge.net) for generating installers
 - For VLC Media Player: a 7z extraction utility, like http://7-zip.org
 
