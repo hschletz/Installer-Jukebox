@@ -111,9 +111,9 @@ void AdobeReader::download(Version version)
     // MSI version always has 2 parts (10.0, 10.1...)
     Version msiVersion;
     if (version.part(1).toInt() >= 11) {
-        msiVersion = version.pad(2).pad(3, "00");
+        msiVersion = version.truncate(2).pad(3, "00");
     } else {
-        msiVersion = version.truncate(2).pad(2);
+        msiVersion = version.truncate(2).pad(3);
     }
     qDebug() << "MSI version" << msiVersion.toString();
 
@@ -126,7 +126,7 @@ void AdobeReader::download(Version version)
                 msiUrl
                 .arg(msiVersion.truncate(2).replace(2, "x"))
                 .arg(msiVersion.pad(3))
-                .arg(msiVersion.pad(3).stripDots())
+                .arg(msiVersion.stripDots())
                 .arg(language),
                 Application::getTmpDir()
                 );
@@ -143,7 +143,7 @@ void AdobeReader::download(Version version)
     QString mspUrl("http://ardownload.adobe.com/pub/adobe/reader/win/%1/%2/misc/AdbeRdrUpd%3.msp");
     QString mspFile = Downloader::get(
                     mspUrl
-                    .arg(msiVersion.replace(2, "x"))
+                    .arg(msiVersion.truncate(2).replace(2, "x"))
                     .arg(version)
                     .arg(version.stripDots()),
                     Application::getTmpDir()
