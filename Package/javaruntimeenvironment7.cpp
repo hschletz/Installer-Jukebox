@@ -41,7 +41,13 @@ void JavaRuntimeEnvironment7::build(NSIS *installer, Version version)
     download(version);
     if (!isError) {
         QString header;
-        QString src(loadResource(":NSIS/JavaRuntimeEnvironment7/main.nsh"));
+        QString src;
+
+        if (getConfig("Uninstall JRE6", false).toBool()) {
+            src += loadResource(":NSIS/JavaRuntimeEnvironment7/uninstalljre6.nsh");
+        }
+
+        src += loadResource(":NSIS/JavaRuntimeEnvironment7/main.nsh");
         src.replace("${Installer}", QFileInfo(tempFiles.first()).fileName());
 
         if (!getConfig("Use automatic update", true).toBool()) {

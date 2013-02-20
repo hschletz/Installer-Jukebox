@@ -99,7 +99,8 @@ OTHER_FILES += \
     NSIS/OcsInventoryNgAgent/installplugin.nsh \
     NSIS/InfraRecorder/main.nsh \
     NSIS/InfraRecorder/header.nsh \
-    NSIS/InfraRecorder/setversion.nsh
+    NSIS/InfraRecorder/setversion.nsh \
+    NSIS/JavaRuntimeEnvironment7/uninstalljre6.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc

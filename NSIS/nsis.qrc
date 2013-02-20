@@ -33,5 +33,6 @@
         <file>InfraRecorder/main.nsh</file>
         <file>InfraRecorder/header.nsh</file>
         <file>InfraRecorder/setversion.nsh</file>
+        <file>JavaRuntimeEnvironment7/uninstalljre6.nsh</file>
     </qresource>
 </RCC>
