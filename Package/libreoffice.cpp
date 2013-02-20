@@ -98,8 +98,20 @@ void LibreOffice::build(NSIS *installer, Version version)
 
 void LibreOffice::download(Version version)
 {
-    QString url("http://download.documentfoundation.org/libreoffice/stable/%1/win/x86/LibO_%1_Win_x86_install_multi.msi");
-    QString target(Downloader::get(url.arg(version), Application::getTmpDir()));
+    version = version.pad(3);
+
+    QString filename;
+    if (version.part(1).toUInt() >= 4) {
+        filename = QString("LibreOffice_%1_Win_x86.msi").arg(version);
+    } else {
+        filename = QString("LibO_%1_Win_x86_install_multi.msi").arg(version);
+    }
+
+    QString url("http://download.documentfoundation.org/libreoffice/stable/%1/win/x86/%2");
+    QString target(
+                Downloader::get(url.arg(version).arg(filename),
+                                Application::getTmpDir())
+                );
     if (target.isEmpty()) {
         isError = true;
     } else {
