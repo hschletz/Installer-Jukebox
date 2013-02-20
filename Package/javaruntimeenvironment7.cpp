@@ -24,39 +24,39 @@
  */
 
 #include <QFileInfo>
-#include "javaruntimeenvironment6.h"
+#include "javaruntimeenvironment7.h"
 #include "manualdownload.h"
 
 
-JavaRuntimeEnvironment6::JavaRuntimeEnvironment6() :
-    Package("Java Runtime Environment 6", "35")
+JavaRuntimeEnvironment7::JavaRuntimeEnvironment7() :
+    Package("Java Runtime Environment 7", "15")
 {
 }
 
 
-void JavaRuntimeEnvironment6::build(NSIS *installer, Version version)
+void JavaRuntimeEnvironment7::build(NSIS *installer, Version version)
 {
     isError = false;
 
     download(version);
     if (!isError) {
         QString header;
-        QString src(loadResource(":NSIS/JavaRuntimeEnvironment6/main.nsh"));
+        QString src(loadResource(":NSIS/JavaRuntimeEnvironment7/main.nsh"));
         src.replace("${Installer}", QFileInfo(tempFiles.first()).fileName());
 
         if (!getConfig("Use automatic update", true).toBool()) {
-            src += loadResource(":NSIS/JavaRuntimeEnvironment6/disableautoupdate.nsh");
+            src += loadResource(":NSIS/JavaRuntimeEnvironment7/disableautoupdate.nsh");
         }
         if (!getConfig("Use Quickstarter", true).toBool()) {
             header += "!include 'WinVer.nsh'\n";
-            src += loadResource(":NSIS/JavaRuntimeEnvironment6/disablequickstarter.nsh");
+            src += loadResource(":NSIS/JavaRuntimeEnvironment7/disablequickstarter.nsh");
         }
 
         installer->build(
                     objectName(),
                     getOutputFile(),
                     NSIS::Lzma,
-                    70,
+                    120,
                     browsers(),
                     tempFiles,
                     src,
@@ -67,12 +67,12 @@ void JavaRuntimeEnvironment6::build(NSIS *installer, Version version)
 }
 
 
-void JavaRuntimeEnvironment6::download(Version version)
+void JavaRuntimeEnvironment7::download(Version version)
 {
     QString filename(
                 ManualDownload::getFile(
-                    QString("jre-6u%1-windows-i586.exe").arg(version),
-                    "http://www.java.com/java6download/",
+                    QString("jre-7u%1-windows-i586.exe").arg(version),
+                    "http://www.java.com/inc/BrowserRedirect1.jsp",
                     "You need to download the 32 bit offline installer."
                     )
                 );

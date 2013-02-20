@@ -23,16 +23,16 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef JAVARUNTIMEENVIRONMENT6_H
-#define JAVARUNTIMEENVIRONMENT6_H
+#ifndef JAVARUNTIMEENVIRONMENT7_H
+#define JAVARUNTIMEENVIRONMENT7_H
 
 #include "package.h"
 
 
 /**
- * @brief Java Runtime Environment 6 package
+ * @brief Java Runtime Environment 7 package
  */
-class JavaRuntimeEnvironment6 : public Package
+class JavaRuntimeEnvironment7 : public Package
 {
 
 public:
@@ -40,7 +40,7 @@ public:
     /**
      * @brief Constructor
      */
-    JavaRuntimeEnvironment6();
+    JavaRuntimeEnvironment7();
 
     void build(NSIS *installer, Version version);
 
@@ -54,4 +54,4 @@ private:
 
 };
 
-#endif // JAVARUNTIMEENVIRONMENT6_H
+#endif // JAVARUNTIMEENVIRONMENT7_H

@@ -12,7 +12,7 @@ or just for frequent reinstallation for personal use. Supported packages are:
 - Flash Player ActiveX
 - Flash Player Plugin
 - InfraRecorder
-- Java Runtime Environment 6
+- Java Runtime Environment 7
 - LibreOffice
 - OCS Inventory NG agent
 - Opera

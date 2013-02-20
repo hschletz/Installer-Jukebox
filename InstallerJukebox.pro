@@ -33,9 +33,9 @@ SOURCES += main.cpp\
     Package/Mozilla/thunderbird.cpp \
     Package/Mozilla/firefox.cpp \
     Package/ocsinventoryngagent.cpp \
-    Package/javaruntimeenvironment6.cpp \
     manualdownload.cpp \
-    Package/infrarecorder.cpp
+    Package/infrarecorder.cpp \
+    Package/javaruntimeenvironment7.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -56,9 +56,9 @@ HEADERS  += dialog.h \
     Package/Mozilla/thunderbird.h \
     Package/Mozilla/firefox.h \
     Package/ocsinventoryngagent.h \
-    Package/javaruntimeenvironment6.h \
     manualdownload.h \
-    Package/infrarecorder.h
+    Package/infrarecorder.h \
+    Package/javaruntimeenvironment7.h
 
 FORMS    += dialog.ui \
     command.ui \
@@ -93,9 +93,9 @@ OTHER_FILES += \
     NSIS/Firefox/writeprefs.nsh \
     NSIS/OcsInventoryNgAgent/main.nsh \
     NSIS/OcsInventoryNgAgent/installcert.nsh \
-    NSIS/JavaRuntimeEnvironment6/main.nsh \
-    NSIS/JavaRuntimeEnvironment6/disablequickstarter.nsh \
-    NSIS/JavaRuntimeEnvironment6/disableautoupdate.nsh \
+    NSIS/JavaRuntimeEnvironment7/main.nsh \
+    NSIS/JavaRuntimeEnvironment7/disablequickstarter.nsh \
+    NSIS/JavaRuntimeEnvironment7/disableautoupdate.nsh \
     NSIS/OcsInventoryNgAgent/installplugin.nsh \
     NSIS/InfraRecorder/main.nsh \
     NSIS/InfraRecorder/header.nsh \

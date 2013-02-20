@@ -37,7 +37,7 @@
 #include "Package/flashplayerplugin.h"
 #include "Package/flashplayeractivex.h"
 #include "Package/infrarecorder.h"
-#include "Package/javaruntimeenvironment6.h"
+#include "Package/javaruntimeenvironment7.h"
 #include "Package/libreoffice.h"
 #include "Package/ocsinventoryngagent.h"
 #include "Package/opera.h"
@@ -78,8 +78,8 @@ QMap<QString, Package *> Package::getPackages()
             package = new FlashPlayerActiveX();
         } else if (packageName.compare("InfraRecorder", Qt::CaseInsensitive) == 0) {
             package = new InfraRecorder();
-        } else if (packageName.compare("Java Runtime Environment 6", Qt::CaseInsensitive) == 0) {
-            package = new JavaRuntimeEnvironment6();
+        } else if (packageName.compare("Java Runtime Environment 7", Qt::CaseInsensitive) == 0) {
+            package = new JavaRuntimeEnvironment7();
         } else if (packageName.compare("LibreOffice", Qt::CaseInsensitive) == 0) {
             package = new LibreOffice();
         } else if (packageName.compare("OCS Inventory NG agent", Qt::CaseInsensitive) == 0) {
