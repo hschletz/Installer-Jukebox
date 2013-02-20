@@ -61,7 +61,7 @@ void JavaRuntimeEnvironment7::build(NSIS *installer, Version version)
         installer->build(
                     objectName(),
                     getOutputFile(),
-                    NSIS::Lzma,
+                    NSIS::Zlib,
                     120,
                     browsers(),
                     tempFiles,
