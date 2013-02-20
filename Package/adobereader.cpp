@@ -32,6 +32,8 @@
 AdobeReader::AdobeReader() :
     Package("Adobe Reader", "10.1.3")
 {
+    // Initialize dependencies
+    dependencies["11.0.02"] = Version("11.0.01");
 }
 
 
@@ -136,27 +138,40 @@ void AdobeReader::download(Version version)
     }
     tempFiles << msiFile;
 
-    // If version has 3 parts, download MSP file.
-    if (version.numParts() < 3) {
-        return;
+    // If version has 3 parts, download MSP file(s).
+    if (version.numParts() > 2) {
+        downloadPatch(version);
     }
-    QString mspUrl("http://ardownload.adobe.com/pub/adobe/reader/win/%1/%2/misc/AdbeRdrUpd%3.msp");
+}
+
+
+void AdobeReader::downloadPatch(Version version)
+{
+    QString baseName;
+    if (dependencies.contains(version)) {
+        // This is a security patch which depends on the latest quarterly update.
+        downloadPatch(dependencies[version]);
+        if (isError) {
+            return;
+        }
+        baseName = "AdbeRdrSecUpd";
+    } else {
+        // A regular quarterly update with no dependency other than the base MSI
+        baseName = "AdbeRdrUpd";
+    }
+
+    QString mspUrl("http://ardownload.adobe.com/pub/adobe/reader/win/%1/%2/misc/%3%4.msp");
     QString mspFile = Downloader::get(
                     mspUrl
-                    .arg(msiVersion.truncate(2).replace(2, "x"))
+                    .arg(version.truncate(2).replace(2, "x"))
                     .arg(version)
+                    .arg(baseName)
                     .arg(version.stripDots()),
                     Application::getTmpDir()
                     );
     if (mspFile.isEmpty()) {
         isError = true;
     } else {
-        // In the past, there have been releases where more than 1 MSP was
-        // required for a fresh up-to-date installation. For this reason,
-        // the patches are stored in a list.
-        // The dependency tracking is not implemented yet (it will should it
-        // ever become necessary again), but the rest of the code is already
-        // prepared for multiple patches.
         mspFiles << qMakePair(version, mspFile);
         tempFiles << mspFile;
     }

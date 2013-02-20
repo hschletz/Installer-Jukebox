@@ -56,6 +56,12 @@ private:
     void download(Version version);
 
     /**
+     * @brief Download MSP file, with optional dependency MSPs
+     * @param version Version to download, including dependencies
+     */
+    void downloadPatch(Version version);
+
+    /**
      * @brief Path to downloaded MSI file
      */
     QString msiFile;
@@ -64,6 +70,11 @@ private:
      * @brief Paths of downloaded MSP files
      */
     QList<QPair<Version, QString> > mspFiles;
+
+    /**
+     * @brief Dependency table, initialized by constructor
+     */
+    QHash<QString, Version> dependencies;
 };
 
 #endif // ADOBEREADER_H
