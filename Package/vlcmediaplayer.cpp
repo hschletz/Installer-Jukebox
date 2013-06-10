@@ -99,8 +99,18 @@ void VlcMediaPlayer::download(Version version, Installer *installer)
     }
 
     // Download and extract the 7z archive
-    QString path("%1/win32/vlc-%1-win32.7z");
-    QString target(Sourceforge::getProjectFile("vlc", path.arg(version), Application::getTmpDir()));
+    QString url("http://get.videolan.org/vlc/%1/win32/vlc-%1-win32.7z");
+    // Qt's default User-Agent header leads to a countdown page with HTTP status
+    // 200, which only works in a full-featured browser. To get a 302 response,
+    // use an arbitrary header not recognized by the site.
+    QString target(
+                Downloader::get(
+                    url.arg(version),
+                    Application::getTmpDir(),
+                    "",
+                    "Installer Jukebox"
+                    )
+                );
     if (target.isEmpty()) {
         isError = true;
         return;
