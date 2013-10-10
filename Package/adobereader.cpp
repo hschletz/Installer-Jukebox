@@ -34,6 +34,7 @@ AdobeReader::AdobeReader() :
 {
     // Initialize dependencies
     dependencies["11.0.02"] = Version("11.0.01");
+    dependencies["11.0.05"] = Version("11.0.04");
 }
 
 
