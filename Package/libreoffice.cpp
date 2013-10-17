@@ -32,7 +32,7 @@
 
 
 LibreOffice::LibreOffice() :
-    Package("LibreOffice", "3.6.0")
+    Package("LibreOffice", "4.1.0")
 {
 }
 
@@ -72,7 +72,7 @@ void LibreOffice::build(NSIS *installer, Version version)
                 files << configTemplate;
                 src += loadResource(":NSIS/LibreOffice/configtemplate.nsh")
                         .replace("${ConfigTemplate}", file.fileName())
-                        .replace("${ShortVersion}", version.pad(2).truncate(2))
+                        .replace("${ShortVersion}", version.truncate(1))
                         ;
             } else {
                 Application::critical(tr("The configuration template '%1' cannot be read.").arg(configTemplate));
