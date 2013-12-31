@@ -30,7 +30,7 @@
 #include "vlcmediaplayer.h"
 
 VlcMediaPlayer::VlcMediaPlayer() :
-    Package("VLC Media Player", "2.0.3")
+    Package("VLC Media Player", "2.1.2")
 {
 }
 
@@ -123,8 +123,7 @@ void VlcMediaPlayer::download(Version version, Installer *installer)
     QString src(extractedPath + "/vlc.win32.nsi");
     bool disableActiveX = !getConfig("Install ActiveX plugin", true).toBool();
     bool disableMozilla = !getConfig("Install Mozilla plugin", true).toBool();
-    bool uninstallOldVersion = getConfig("Uninstall old version").toBool();
-    if (disableActiveX or disableMozilla or uninstallOldVersion) {
+    if (disableActiveX or disableMozilla) {
         QFile file(src);
         if (!file.open(QIODevice::ReadWrite)) {
             isError = true;
@@ -139,14 +138,6 @@ void VlcMediaPlayer::download(Version version, Installer *installer)
         }
         if (disableMozilla) {
             if (!patch(content, "!define INSTALL_MOZILLA", "")) {
-                return;
-            }
-        }
-        if (uninstallOldVersion) {
-            if (!patch(content, "$Message_AlreadyInstalled /SD IDNO", "$Message_AlreadyInstalled /SD IDYES")) {
-                return;
-            }
-            if (!patch(content, "$R0 _?=$INSTDIR", "$R0 /S _?=$INSTDIR")) {
                 return;
             }
         }
