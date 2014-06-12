@@ -57,7 +57,7 @@ void FlashPlayerActiveX::download()
 {
     QString target(
         Downloader::get(
-            "http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_13_active_x.exe",
+            "http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_14_active_x.exe",
             Application::getTmpDir()
         )
     );
