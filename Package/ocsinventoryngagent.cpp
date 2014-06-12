@@ -33,7 +33,7 @@
 #include "ocsinventoryngagent.h"
 
 OcsInventoryNgAgent::OcsInventoryNgAgent() :
-    Package("OCS Inventory NG agent", "2.0.5")
+    Package("OCS Inventory NG agent", "2.1.1.1")
 {
 }
 
@@ -94,8 +94,8 @@ void OcsInventoryNgAgent::download(Version version)
 {
     QString archive(
                 Downloader::get(
-                    QString("http://launchpad.net/ocsinventory-windows-agent/%1/%2/+download/OCSNG-Windows-Agent-%3.zip")
-                    .arg(version.truncate(2)).arg(version.truncate(3)).arg(version),
+                    QString("http://launchpad.net/ocsinventory-windows-agent/%1.x/%2/+download/OCSNG-Windows-Agent-%3.zip")
+                    .arg(version.truncate(1)).arg(version.truncate(3)).arg(version.truncate(3)),
                     Application::getTmpDir()
                     )
                 );
