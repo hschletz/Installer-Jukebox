@@ -57,7 +57,7 @@ void FlashPlayerPlugin::download()
 {
     QString target(
         Downloader::get(
-            "http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_15_plugin.exe",
+            "http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_16_plugin.exe",
             Application::getTmpDir()
         )
     );
