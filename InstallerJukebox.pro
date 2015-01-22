@@ -35,7 +35,7 @@ SOURCES += main.cpp\
     Package/ocsinventoryngagent.cpp \
     manualdownload.cpp \
     Package/infrarecorder.cpp \
-    Package/javaruntimeenvironment7.cpp
+    Package/javaruntimeenvironment8.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -58,7 +58,7 @@ HEADERS  += dialog.h \
     Package/ocsinventoryngagent.h \
     manualdownload.h \
     Package/infrarecorder.h \
-    Package/javaruntimeenvironment7.h
+    Package/javaruntimeenvironment8.h
 
 FORMS    += dialog.ui \
     command.ui \
@@ -93,14 +93,12 @@ OTHER_FILES += \
     NSIS/Firefox/writeprefs.nsh \
     NSIS/OcsInventoryNgAgent/main.nsh \
     NSIS/OcsInventoryNgAgent/installcert.nsh \
-    NSIS/JavaRuntimeEnvironment7/main.nsh \
-    NSIS/JavaRuntimeEnvironment7/disablequickstarter.nsh \
-    NSIS/JavaRuntimeEnvironment7/disableautoupdate.nsh \
+    NSIS/JavaRuntimeEnvironment8/main.nsh \
+    NSIS/JavaRuntimeEnvironment8/disableautoupdate.nsh \
     NSIS/OcsInventoryNgAgent/installplugin.nsh \
     NSIS/InfraRecorder/main.nsh \
     NSIS/InfraRecorder/header.nsh \
-    NSIS/InfraRecorder/setversion.nsh \
-    NSIS/JavaRuntimeEnvironment7/uninstalljre6.nsh
+    NSIS/InfraRecorder/setversion.nsh
 
 RESOURCES += \
     NSIS/nsis.qrc
