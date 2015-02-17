@@ -27,13 +27,13 @@
 #include "application.h"
 #include "sourceforge.h"
 
-Sourceforge::Sourceforge(QString sourceUrl, QString targetDir, QString filename, QString userAgent) :
+Sourceforge::Sourceforge(QString sourceUrl, QString targetDir, QString filename, QByteArray userAgent) :
     Downloader(sourceUrl, targetDir, filename, userAgent)
 {
 }
 
 
-Sourceforge::Sourceforge(QString sourceUrl, QString target, QString userAgent) :
+Sourceforge::Sourceforge(QString sourceUrl, QString target, QByteArray userAgent) :
     Downloader(sourceUrl, target, userAgent)
 {
 }

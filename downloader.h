@@ -56,7 +56,7 @@ protected:
      * @param filename
      * @param userAgent
      */
-    Downloader(QString sourceUrl, QString targetDir, QString filename, QString userAgent);
+    Downloader(QString sourceUrl, QString targetDir, QString filename, QByteArray userAgent);
 
     /**
      * @brief Constructs downloader with already known target path
@@ -66,7 +66,7 @@ protected:
      * @param target
      * @param userAgent
      */
-    explicit Downloader(QString url, QString target, QString userAgent);
+    explicit Downloader(QString url, QString target, QByteArray userAgent);
 
     /**
      * @brief Destructor
@@ -87,7 +87,7 @@ public:
      * @param userAgent User-Agent header to use. If empty, QNetworkRequest's default is used.
      * @return QString Full path of downloaded file, or empty on error
      */
-    static QString get(QString sourceUrl, QString targetDir, QString filename="", QString userAgent="");
+    static QString get(QString sourceUrl, QString targetDir, QString filename="", QByteArray userAgent="");
 
 protected:
 
@@ -169,7 +169,7 @@ protected:
     /**
      * @brief User agent to sent in HTTP request
      */
-    QString userAgent;
+    QByteArray userAgent;
 
 private:
 

@@ -31,7 +31,7 @@
 #include "downloader.h"
 
 
-Downloader::Downloader(QString sourceUrl, QString targetDir, QString filename, QString userAgent) :
+Downloader::Downloader(QString sourceUrl, QString targetDir, QString filename, QByteArray userAgent) :
     QObject(0),
     userAgent(userAgent),
     dialog(NULL),
@@ -85,7 +85,7 @@ Downloader::Downloader(QString sourceUrl, QString targetDir, QString filename, Q
 }
 
 
-Downloader::Downloader(QString url, QString target, QString userAgent) :
+Downloader::Downloader(QString url, QString target, QByteArray userAgent) :
     QObject(0),
     url(url),
     target(target),
@@ -104,7 +104,7 @@ Downloader::~Downloader()
 }
 
 
-QString Downloader::get(QString sourceUrl, QString targetDir, QString filename, QString userAgent)
+QString Downloader::get(QString sourceUrl, QString targetDir, QString filename, QByteArray userAgent)
 {
     Downloader downloader(sourceUrl, targetDir, filename, userAgent);
     return downloader.getFile();
@@ -145,7 +145,7 @@ QString Downloader::download(int maxRedirects)
     startTime = QTime::currentTime();
 
     QNetworkRequest request(url);
-    request.setRawHeader("User-Agent", userAgent.toAscii());
+    request.setRawHeader("User-Agent", userAgent);
     reply = net.get(request);
     connect(reply, SIGNAL(finished()), this, SLOT(finish()));
     connect(reply, SIGNAL(readyRead()), this, SLOT(receive()));

@@ -47,7 +47,7 @@ public:
      * @param filename
      * @param userAgent
      */
-    Sourceforge(QString sourceUrl, QString targetDir, QString filename, QString userAgent);
+    Sourceforge(QString sourceUrl, QString targetDir, QString filename, QByteArray userAgent);
 
     /**
      * @brief Constructor
@@ -55,7 +55,7 @@ public:
      * @param target
      * @param userAgent
      */
-    explicit Sourceforge(QString sourceUrl, QString target, QString userAgent);
+    explicit Sourceforge(QString sourceUrl, QString target, QByteArray userAgent);
 
     /**
      * @brief Get a file from a project's download area
