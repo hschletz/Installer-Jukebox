@@ -95,6 +95,7 @@ OTHER_FILES += \
     NSIS/OcsInventoryNgAgent/installcert.nsh \
     NSIS/JavaRuntimeEnvironment8/main.nsh \
     NSIS/JavaRuntimeEnvironment8/disableautoupdate.nsh \
+    NSIS/JavaRuntimeEnvironment8/uninstallpreviousversions.nsh \
     NSIS/OcsInventoryNgAgent/installplugin.nsh \
     NSIS/InfraRecorder/main.nsh \
     NSIS/InfraRecorder/header.nsh \

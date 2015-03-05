@@ -44,7 +44,10 @@ void JavaRuntimeEnvironment8::build(NSIS *installer, Version version)
         QString src;
 
         if (getConfig("Uninstall previous versions", false).toBool()) {
-            src += loadResource(":NSIS/JavaRuntimeEnvironment8/uninstallpreviousversions.nsh");
+            QString uninstall(loadResource(":NSIS/JavaRuntimeEnvironment8/uninstallpreviousversions.nsh"));
+            uninstall.replace("${VersionMajor}", "8");
+            uninstall.replace("${VersionMinor}", version);
+            src += uninstall;
         }
 
         src += loadResource(":NSIS/JavaRuntimeEnvironment8/main.nsh");
