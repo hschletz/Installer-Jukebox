@@ -22,12 +22,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#include <QFileInfo>
 #include "flashplayerplugin.h"
 #include "downloader.h"
 #include "application.h"
 
 FlashPlayerPlugin::FlashPlayerPlugin() :
-    Package("Flash Player Plugin")
+    Package("Flash Player Plugin", "17")
 {
 }
 
@@ -36,7 +37,7 @@ void FlashPlayerPlugin::build(NSIS *installer, Version version)
     Q_UNUSED(version);
 
     isError = false;
-    download();
+    download(version);
     if (!isError) {
         QStringList blockingProcesses(browsers());
         blockingProcesses.removeAll("chrome.exe");
@@ -47,17 +48,21 @@ void FlashPlayerPlugin::build(NSIS *installer, Version version)
                     40,
                     blockingProcesses,
                     tempFiles,
-                    loadResource(":NSIS/FlashPlayerPlugin/main.nsh")
+                    loadResource(":NSIS/FlashPlayerPlugin/main.nsh").replace(
+                        "${Installer}",
+                        QFileInfo(tempFiles.first()).fileName()
+                        )
                     );
     }
     cleanup();
 }
 
-void FlashPlayerPlugin::download()
+void FlashPlayerPlugin::download(Version version)
 {
     QString target(
         Downloader::get(
-            "http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_16_plugin.exe",
+            QString("http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_%1_plugin.exe")
+                    .arg(version.part(1)),
             Application::getTmpDir()
         )
     );

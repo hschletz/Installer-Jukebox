@@ -22,12 +22,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#include <QFileInfo>
 #include "application.h"
 #include "downloader.h"
 #include "flashplayeractivex.h"
 
 FlashPlayerActiveX::FlashPlayerActiveX() :
-    Package("Flash Player ActiveX")
+    Package("Flash Player ActiveX", "17")
 {
 }
 
@@ -37,7 +38,7 @@ void FlashPlayerActiveX::build(NSIS *installer, Version version)
     Q_UNUSED(version);
 
     isError = false;
-    download();
+    download(version);
     if (!isError) {
         installer->build(
                     objectName(),
@@ -46,18 +47,21 @@ void FlashPlayerActiveX::build(NSIS *installer, Version version)
                     40,
                     QStringList(),
                     tempFiles,
-                    loadResource(":NSIS/FlashPlayerActiveX/main.nsh")
+                    loadResource(":NSIS/FlashPlayerActiveX/main.nsh").replace(
+                        "${Installer}",
+                        QFileInfo(tempFiles.first()).fileName())
                     );
     }
     cleanup();
 }
 
 
-void FlashPlayerActiveX::download()
+void FlashPlayerActiveX::download(Version version)
 {
     QString target(
         Downloader::get(
-            "http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_16_active_x.exe",
+            QString("http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_%1_active_x.exe")
+                    .arg(version.part(1)),
             Application::getTmpDir()
         )
     );

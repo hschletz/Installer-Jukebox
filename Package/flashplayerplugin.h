@@ -43,7 +43,7 @@ public:
     /**
      * @brief Download original installer
      */
-    void download();
+    void download(Version version);
 };
 
 #endif // FLASHPLAYERPLUGIN_H
