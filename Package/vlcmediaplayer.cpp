@@ -24,9 +24,10 @@
  */
 
 #include <QDebug>
+#include <QFile>
 #include <QStringList>
 #include "application.h"
-#include "Downloader/sourceforge.h"
+#include "downloader.h"
 #include "vlcmediaplayer.h"
 
 VlcMediaPlayer::VlcMediaPlayer() :
