@@ -7,24 +7,36 @@
     <x>0</x>
     <y>0</y>
     <width>406</width>
-    <height>155</height>
+    <height>180</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
      <width>391</width>
-     <height>136</height>
+     <height>166</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The installer '%1' cannot be downloaded automatically. Get it from the &lt;a href=&quot;%2&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;download site&lt;/span&gt;&lt;/a&gt; and select the file.&lt;/p&gt;&lt;p&gt;%3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
@@ -66,11 +78,6 @@
     </item>
    </layout>
   </widget>
-  <zorder>buttonBox</zorder>
-  <zorder>label</zorder>
-  <zorder>filename</zorder>
-  <zorder>button</zorder>
-  <zorder>filename</zorder>
  </widget>
  <resources/>
  <connections>

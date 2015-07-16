@@ -13,6 +13,8 @@ TEMPLATE = app
 
 LIBS += -lquazip
 
+gcc:QMAKE_CXXFLAGS += -fPIC
+
 SOURCES += main.cpp\
         dialog.cpp \
     installer.cpp \
