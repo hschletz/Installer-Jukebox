@@ -46,29 +46,11 @@ public:
 private:
 
     /**
-     * @brief Download and build a customized installer
+     * @brief Download installer
      *
-     * The VLC installer offers almost no command line options to control the
-     * installation. Fortunately, its NSIS source code is available in the 7z
-     * download. It can be patched and rebuilt with the required functionality.
-     *
-     * This modified installer still receives a wrapper for the generic
-     * functionality.
+     * @param version
      */
-    void download(Version version, Installer *installer);
-
-    /**
-     * @brief Patch the NSIS source code
-     *
-     * This function replaces strings in the NSIS source code, but only if it
-     * is really present and unambiguous. This is a precaution for changes in
-     * the source code which would otherwise cause silent failure.
-     * @param source Reference to source code (will be modified)
-     * @param before String to replace
-     * @param after Replacement
-     * @return bool Success
-     */
-    bool patch(QString &source, QString before, QString after);
+    void download(Version version);
 };
 
 #endif // VLCMEDIAPLAYER_H

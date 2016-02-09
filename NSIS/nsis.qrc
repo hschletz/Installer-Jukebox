@@ -33,5 +33,7 @@
         <file>InfraRecorder/header.nsh</file>
         <file>InfraRecorder/setversion.nsh</file>
         <file>JavaRuntimeEnvironment8/uninstallpreviousversions.nsh</file>
+        <file>VlcMediaPlayer/uninstallActiveXPlugin.nsh</file>
+        <file>VlcMediaPlayer/uninstallMozillaPlugin.nsh</file>
     </qresource>
 </RCC>

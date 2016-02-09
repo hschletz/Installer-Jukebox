@@ -105,3 +105,7 @@ OTHER_FILES += \
 
 RESOURCES += \
     NSIS/nsis.qrc
+
+DISTFILES += \
+    NSIS/VlcMediaPlayer/uninstallActiveXPlugin.nsh \
+    NSIS/VlcMediaPlayer/uninstallMozillaPlugin.nsh
