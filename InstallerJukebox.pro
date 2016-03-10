@@ -11,7 +11,7 @@ QT       += core gui network widgets
 TARGET = InstallerJukebox
 TEMPLATE = app
 
-LIBS += -lquazip
+LIBS += -lquazip5
 
 gcc:QMAKE_CXXFLAGS += -fPIC
 

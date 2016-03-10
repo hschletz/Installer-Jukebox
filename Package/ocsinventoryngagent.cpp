@@ -26,8 +26,8 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <quazip/quazip.h>
-#include <quazip/quazipfile.h>
+#include <quazip5/quazip.h>
+#include <quazip5/quazipfile.h>
 #include "application.h"
 #include "downloader.h"
 #include "ocsinventoryngagent.h"
