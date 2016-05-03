@@ -66,7 +66,7 @@ void VlcMediaPlayer::build(NSIS *installer, Version version)
         src.append(loadResource(":NSIS/VlcMediaPlayer/uninstallActiveXPlugin.nsh"));
     }
 
-    download(version);
+    installerFile = download(version);
 
     if (!isError) {
         isError = !installer->build(
@@ -82,7 +82,7 @@ void VlcMediaPlayer::build(NSIS *installer, Version version)
     cleanup();
 }
 
-void VlcMediaPlayer::download(Version version)
+QString VlcMediaPlayer::download(Version version)
 {
     QString url("http://download.videolan.org/pub/videolan/vlc/%1/win32/vlc-%1-win32.exe");
     QString target(
@@ -96,4 +96,5 @@ void VlcMediaPlayer::download(Version version)
     } else {
         tempFiles << target;
     }
+    return target;
 }

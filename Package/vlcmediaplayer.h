@@ -49,8 +49,9 @@ private:
      * @brief Download installer
      *
      * @param version
+     * @return QString downloaded file
      */
-    void download(Version version);
+    QString download(Version version);
 };
 
 #endif // VLCMEDIAPLAYER_H
