@@ -14,11 +14,22 @@
             ${ExitDo}
         ${EndIf}
 
+        # Check for old versions with 2-digit version number
         StrCpy $2 $1 31
         ${If} $2 == '{26A24AE4-039D-4CA4-87B4-2F8321'
             # Found JRE. Check Version.
             StrCpy $2 $1 35
             ${If} $2 != '{26A24AE4-039D-4CA4-87B4-2F8321${VersionMajor}0${VersionMinor}'
+                # Found different version. Uninstall.
+                ExecWait 'msiexec /qn /x $1'
+            ${EndIf}
+        ${EndIf}
+        # Check for old versions with 3-digit version number
+        StrCpy $2 $1 30
+        ${If} $2 == '{26A24AE4-039D-4CA4-87B4-2F321'
+            # Found JRE. Check Version.
+            StrCpy $2 $1 35
+            ${If} $2 != '{26A24AE4-039D-4CA4-87B4-2F321${VersionMajor}0${VersionMinor}'
                 # Found different version. Uninstall.
                 ExecWait 'msiexec /qn /x $1'
             ${EndIf}
