@@ -28,7 +28,7 @@
 #include "application.h"
 
 FlashPlayerPlugin::FlashPlayerPlugin() :
-    Package("Flash Player Plugin", "17")
+    Package("Flash Player Plugin", "24.0.0.194")
 {
 }
 
@@ -61,8 +61,8 @@ void FlashPlayerPlugin::download(Version version)
 {
     QString target(
         Downloader::get(
-            QString("http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_%1_plugin.exe")
-                    .arg(version.part(1)),
+            QString("http://fpdownload.adobe.com/get/flashplayer/pdc/%1/install_flash_player.exe")
+                    .arg(version),
             Application::getTmpDir()
         )
     );

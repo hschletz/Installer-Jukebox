@@ -28,7 +28,7 @@
 #include "flashplayeractivex.h"
 
 FlashPlayerActiveX::FlashPlayerActiveX() :
-    Package("Flash Player ActiveX", "17")
+    Package("Flash Player ActiveX", "24.0.0.194")
 {
 }
 
@@ -60,8 +60,8 @@ void FlashPlayerActiveX::download(Version version)
 {
     QString target(
         Downloader::get(
-            QString("http://fpdownload.macromedia.com/pub/flashplayer/current/licensing/win/install_flash_player_%1_active_x.exe")
-                    .arg(version.part(1)),
+            QString("http://fpdownload.adobe.com/get/flashplayer/pdc/%1/install_flash_player_ax.exe")
+                    .arg(version),
             Application::getTmpDir()
         )
     );
