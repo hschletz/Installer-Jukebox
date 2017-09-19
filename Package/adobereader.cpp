@@ -30,13 +30,10 @@
 #include "downloader.h"
 
 AdobeReader::AdobeReader() :
-    Package("Adobe Reader", "10.1.3")
+    Package("Adobe Reader", "11.0.21")
 {
     // Initialize dependencies
-    dependencies["11.0.02"] = Version("11.0.01");
-    dependencies["11.0.05"] = Version("11.0.04");
-    dependencies["11.0.08"] = Version("11.0.07");
-    dependencies["11.0.15"] = Version("11.0.14");
+    dependencies["11.0.22"] = Version("11.0.21");
 }
 
 
@@ -150,26 +147,26 @@ void AdobeReader::download(Version version)
 
 void AdobeReader::downloadPatch(Version version)
 {
-    QString baseName;
+    QString suffix;
     if (dependencies.contains(version)) {
         // This is a security patch which depends on the latest quarterly update.
         downloadPatch(dependencies[version]);
         if (isError) {
             return;
         }
-        baseName = "AdbeRdrSecUpd";
+        suffix = "_incr";
     } else {
         // A regular quarterly update with no dependency other than the base MSI
-        baseName = "AdbeRdrUpd";
+        suffix = "";
     }
 
-    QString mspUrl("http://ardownload.adobe.com/pub/adobe/reader/win/%1/%2/misc/%3%4.msp");
+    QString mspUrl("http://ardownload.adobe.com/pub/adobe/reader/win/%1/%2/misc/AdbeRdrUpd%3%4.msp");
     QString mspFile = Downloader::get(
                     mspUrl
                     .arg(version.truncate(2).replace(2, "x"))
                     .arg(version)
-                    .arg(baseName)
-                    .arg(version.stripDots()),
+                    .arg(version.stripDots())
+                    .arg(suffix),
                     Application::getTmpDir()
                     );
     if (mspFile.isEmpty()) {
