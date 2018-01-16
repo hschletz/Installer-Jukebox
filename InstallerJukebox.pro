@@ -79,9 +79,6 @@ OTHER_FILES += \
     NSIS/Opera/speeddial.nsh \
     NSIS/Opera/speeddial_header.nsh \
     NSIS/AdobeReader/main.nsh \
-    NSIS/AdobeReader/header.nsh \
-    NSIS/AdobeReader/installpatch.nsh \
-    NSIS/AdobeReader/disableupdater.nsh \
     NSIS/LibreOffice/main.nsh \
     NSIS/LibreOffice/configtemplate.nsh \
     NSIS/Thunderbird/main.nsh \

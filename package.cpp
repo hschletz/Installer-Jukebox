@@ -68,7 +68,7 @@ QMap<QString, Package *> Package::getPackages()
     foreach (packageName, Application::getConfigGroups()) {
         // Generate matching subclass for every section found
         package = 0;
-        if (packageName.compare("Adobe Reader", Qt::CaseInsensitive) == 0) {
+        if (packageName.compare("Adobe Acrobat Reader DC", Qt::CaseInsensitive) == 0) {
             package = new AdobeReader();
         } else if (packageName.compare("Firefox", Qt::CaseInsensitive) == 0) {
             package = new Firefox();

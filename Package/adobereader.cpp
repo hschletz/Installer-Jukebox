@@ -30,149 +30,60 @@
 #include "downloader.h"
 
 AdobeReader::AdobeReader() :
-    Package("Adobe Reader", "11.0.21")
+    Package("Adobe Acrobat Reader DC", "1800920044")
 {
-    // Initialize dependencies
-    dependencies["11.0.22"] = Version("11.0.21");
 }
-
 
 void AdobeReader::build(NSIS *installer, Version version)
 {
     isError = false;
     download(version);
     if (!isError) {
-        // Compose options for msiexec command line
-        QStringList msiOptions;
-        if (getConfig("Suppress reboot", false).toBool()) {
-            msiOptions << "REBOOT=ReallySuppress";
+        QStringList files(originalInstaller);
+
+        // Compose options for command line
+        QString transformFile(getConfig("Transform").toString());
+        QString transformOption;
+        if (!transformFile.isEmpty()) {
+            transformOption = "TRANSFORMS=\"$PLUGINSDIR\\%1\"";
+            files << transformFile;
         }
-        if (getConfig("Accept EULA", false).toBool()) {
-            msiOptions << "EULA_ACCEPT=YES";
-        }
-        if (!getConfig("Desktop shortcut", true).toBool()) {
-            msiOptions << "DISABLEDESKTOPSHORTCUT=1";
-        }
-        if (getConfig("Set default PDF viewer", false).toBool()) {
-            msiOptions << "IW_DEFAULT_VERB=READ";
-            msiOptions << "LEAVE_PDFOWNERSHIP=NO";
-        } else {
-            msiOptions << "LEAVE_PDFOWNERSHIP=YES";
-        }
-        if (!getConfig("Install synchronizer", true).toBool()) {
-            msiOptions << "SYNCHRONIZER=NO";
-        }
-        if (!getConfig("Use automatic update", true).toBool()) {
-            msiOptions << "DISABLE_ARM_SERVICE_INSTALL=1";
-        }
-        qDebug() << "MSI options:" << msiOptions;
+        qDebug() << "Transform: " << transformFile;
 
         // Compose main installation routine
-        Version msiVersion(version.truncate(2).pad(2));
         QString src(loadResource(":NSIS/AdobeReader/main.nsh"));
-        src.replace("${VersionMajor}", msiVersion.part(1));
-        src.replace("${VersionMinor}", msiVersion.part(2));
-        src.replace("${MsiFile}", QFileInfo(msiFile).fileName());
-        src.replace("${MsiOptions}", msiOptions.join(" "));
-
-        // Compose patch installation if necessary
-        QString header;
-        if (!mspFiles.isEmpty()) {
-            header = loadResource(":NSIS/AdobeReader/header.nsh");
-            QPair<Version, QString> mspFile;
-            foreach (mspFile, mspFiles) {
-                src += loadResource(":NSIS/AdobeReader/installpatch.nsh")
-                        .replace("${MspVersion}", mspFile.first)
-                        .replace("${MspFile}", QFileInfo(mspFile.second).fileName())
-                        ;
-            }
-        }
-
-        // Add code to disable updater if requested
-        if (!getConfig("Use automatic update", true).toBool()) {
-            src += loadResource(":NSIS/AdobeReader/disableupdater.nsh");
-        }
+        src.replace("${Installer}", QFileInfo(originalInstaller).fileName());
+        src.replace("${Options}", transformOption.arg(QFileInfo(transformFile).fileName()));
 
         installer->build(
                     objectName(),
                     getOutputFile(),
-                    NSIS::Zlib,
-                    300,
+                    NSIS::None,
+                    800,
                     browsers() << "AcroRd32.exe",
-                    tempFiles,
+                    files,
                     src,
-                    header
+                    ""
                     );
     }
     cleanup();
 }
 
-
 void AdobeReader::download(Version version)
 {
-    // MSI version always has 2 parts (10.0, 10.1...)
-    Version msiVersion;
-    if (version.part(1).toInt() >= 11) {
-        msiVersion = version.truncate(2).pad(3, "00");
-    } else {
-        msiVersion = version.truncate(2).pad(3);
-    }
-    qDebug() << "MSI version" << msiVersion.toString();
-
     QString language(getConfig("Language", "en_US").toString());
     qDebug()<<"language:"<<language;
 
-    // Download MSI file.
-    QString msiUrl("http://ardownload.adobe.com/pub/adobe/reader/win/%1/%2/%4/AdbeRdr%3_%4.msi");
-    msiFile = Downloader::get(
-                msiUrl
-                .arg(msiVersion.truncate(2).replace(2, "x"))
-                .arg(msiVersion.pad(3))
-                .arg(msiVersion.stripDots())
+    QString url("https://ardownload2.adobe.com/pub/adobe/reader/win/AcrobatDC/%1/AcroRdrDC%1_%2.exe");
+    originalInstaller = Downloader::get(
+                url
+                .arg(version)
                 .arg(language),
                 Application::getTmpDir()
                 );
-    if (msiFile.isEmpty()) {
+    if (originalInstaller.isEmpty()) {
         isError = true;
         return;
     }
-    tempFiles << msiFile;
-
-    // If version has 3 parts, download MSP file(s).
-    if (version.numParts() > 2) {
-        downloadPatch(version);
-    }
-}
-
-
-void AdobeReader::downloadPatch(Version version)
-{
-    QString suffix;
-    if (dependencies.contains(version)) {
-        // This is a security patch which depends on the latest quarterly update.
-        downloadPatch(dependencies[version]);
-        if (isError) {
-            return;
-        }
-        suffix = "_incr";
-    } else {
-        // A regular quarterly update with no dependency other than the base MSI
-        suffix = "";
-    }
-
-    QString mspUrl("http://ardownload.adobe.com/pub/adobe/reader/win/%1/%2/misc/AdbeRdrUpd%3%4.msp");
-    QString mspFile = Downloader::get(
-                    mspUrl
-                    .arg(version.truncate(2).replace(2, "x"))
-                    .arg(version)
-                    .arg(version.stripDots())
-                    .arg(suffix),
-                    Application::getTmpDir()
-                    );
-    if (mspFile.isEmpty()) {
-        isError = true;
-    } else {
-        mspFiles << qMakePair(version, mspFile);
-        tempFiles << mspFile;
-    }
+    tempFiles << originalInstaller;
 }
