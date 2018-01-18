@@ -94,8 +94,7 @@ void OcsInventoryNgAgent::download(Version version)
 {
     QString archive(
                 Downloader::get(
-                    QString("https://github.com/OCSInventory-NG/WindowsAgent/releases/download/%1/OCSNG-Windows-Agent-%2.zip")
-                    .arg(version.truncate(2))
+                    QString("https://github.com/OCSInventory-NG/WindowsAgent/releases/download/%1/OCSNG-Windows-Agent-%1.zip")
                     .arg(version),
                     Application::getTmpDir()
                     )
