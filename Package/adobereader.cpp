@@ -74,10 +74,14 @@ void AdobeReader::download(Version version)
     QString language(getConfig("Language", "en_US").toString());
     qDebug()<<"language:"<<language;
 
+    QString urlVersion(version.stripDots());
+    if (urlVersion.startsWith("20")) {
+        urlVersion = urlVersion.mid(2);
+    }
     QString url("https://ardownload2.adobe.com/pub/adobe/reader/win/AcrobatDC/%1/AcroRdrDC%1_%2.exe");
     originalInstaller = Downloader::get(
                 url
-                .arg(version)
+                .arg(urlVersion)
                 .arg(language),
                 Application::getTmpDir()
                 );
