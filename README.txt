@@ -15,7 +15,6 @@ or just for frequent reinstallation for personal use. Supported packages are:
 - Java Runtime Environment 7
 - LibreOffice
 - OCS Inventory NG agent
-- Opera
 - Thunderbird
 - VLC Media Player
 

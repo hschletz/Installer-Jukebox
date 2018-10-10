@@ -6,9 +6,6 @@
         <file>plugins/nsProcess.dll</file>
         <file>VlcMediaPlayer/main.nsh</file>
         <file>VlcMediaPlayer/blockOnIE.nsh</file>
-        <file>Opera/main.nsh</file>
-        <file>Opera/speeddial.nsh</file>
-        <file>Opera/speeddial_header.nsh</file>
         <file>AdobeReader/main.nsh</file>
         <file>LibreOffice/main.nsh</file>
         <file>LibreOffice/configtemplate.nsh</file>

@@ -28,7 +28,6 @@ SOURCES += main.cpp\
     Downloader/sourceforge.cpp \
     version.cpp \
     Package/vlcmediaplayer.cpp \
-    Package/opera.cpp \
     Package/adobereader.cpp \
     Package/libreoffice.cpp \
     Package/Mozilla/mozilla.cpp \
@@ -51,7 +50,6 @@ HEADERS  += dialog.h \
     Downloader/sourceforge.h \
     version.h \
     Package/vlcmediaplayer.h \
-    Package/opera.h \
     Package/adobereader.h \
     Package/libreoffice.h \
     Package/Mozilla/mozilla.h \
@@ -75,9 +73,6 @@ OTHER_FILES += \
     README.txt \
     NSIS/VlcMediaPlayer/main.nsh \
     NSIS/VlcMediaPlayer/blockOnIE.nsh \
-    NSIS/Opera/main.nsh \
-    NSIS/Opera/speeddial.nsh \
-    NSIS/Opera/speeddial_header.nsh \
     NSIS/AdobeReader/main.nsh \
     NSIS/LibreOffice/main.nsh \
     NSIS/LibreOffice/configtemplate.nsh \
