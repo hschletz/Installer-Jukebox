@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     Package/ocsinventoryngagent.cpp \
     manualdownload.cpp \
     Package/infrarecorder.cpp \
-    Package/javaruntimeenvironment8.cpp
+    Package/javaruntimeenvironment8.cpp \
+    Package/telegramdesktop.cpp
 
 HEADERS  += dialog.h \
     installer.h \
@@ -58,7 +59,8 @@ HEADERS  += dialog.h \
     Package/ocsinventoryngagent.h \
     manualdownload.h \
     Package/infrarecorder.h \
-    Package/javaruntimeenvironment8.h
+    Package/javaruntimeenvironment8.h \
+    Package/telegramdesktop.h
 
 FORMS    += dialog.ui \
     command.ui \

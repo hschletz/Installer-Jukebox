@@ -40,6 +40,7 @@
 #include "Package/javaruntimeenvironment8.h"
 #include "Package/libreoffice.h"
 #include "Package/ocsinventoryngagent.h"
+#include "Package/telegramdesktop.h"
 #include "Package/Mozilla/thunderbird.h"
 #include "Package/vlcmediaplayer.h"
 
@@ -83,6 +84,8 @@ QMap<QString, Package *> Package::getPackages()
             package = new LibreOffice();
         } else if (packageName.compare("OCS Inventory NG agent", Qt::CaseInsensitive) == 0) {
             package = new OcsInventoryNgAgent();
+        } else if (packageName.compare("Telegram Desktop", Qt::CaseInsensitive) == 0) {
+            package = new TelegramDesktop();
         } else if (packageName.compare("Thunderbird", Qt::CaseInsensitive) == 0) {
             package = new Thunderbird();
         } else if (packageName.compare("VLC Media Player", Qt::CaseInsensitive) == 0) {
