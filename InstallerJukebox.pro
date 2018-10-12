@@ -1,9 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2012-07-07T13:51:55
-#
-#-------------------------------------------------
-
 CONFIG += debug_and_release
 
 QT       += core gui network widgets
@@ -15,91 +9,87 @@ LIBS += -lquazip5
 
 gcc:QMAKE_CXXFLAGS += -fPIC
 
-SOURCES += main.cpp\
-        dialog.cpp \
-    installer.cpp \
-    Installer/nsis.cpp \
-    package.cpp \
-    Package/flashplayerplugin.cpp \
-    Package/flashplayeractivex.cpp \
-    downloader.cpp \
-    application.cpp \
-    command.cpp \
-    Downloader/sourceforge.cpp \
-    version.cpp \
-    Package/vlcmediaplayer.cpp \
-    Package/adobereader.cpp \
-    Package/libreoffice.cpp \
-    Package/Mozilla/mozilla.cpp \
-    Package/Mozilla/thunderbird.cpp \
-    Package/Mozilla/firefox.cpp \
-    Package/ocsinventoryngagent.cpp \
-    manualdownload.cpp \
-    Package/infrarecorder.cpp \
-    Package/javaruntimeenvironment8.cpp \
-    Package/telegramdesktop.cpp
+SOURCES += main.cpp
+SOURCES += application.cpp
+SOURCES += command.cpp
+SOURCES += dialog.cpp
+SOURCES += downloader.cpp
+SOURCES += installer.cpp
+SOURCES += manualdownload.cpp
+SOURCES += package.cpp
+SOURCES += version.cpp
+SOURCES += Downloader/sourceforge.cpp
+SOURCES += Installer/nsis.cpp
+SOURCES += Package/adobereader.cpp
+SOURCES += Package/flashplayeractivex.cpp
+SOURCES += Package/flashplayerplugin.cpp
+SOURCES += Package/infrarecorder.cpp
+SOURCES += Package/javaruntimeenvironment8.cpp
+SOURCES += Package/libreoffice.cpp
+SOURCES += Package/ocsinventoryngagent.cpp
+SOURCES += Package/telegramdesktop.cpp
+SOURCES += Package/vlcmediaplayer.cpp
+SOURCES += Package/Mozilla/mozilla.cpp
+SOURCES += Package/Mozilla/firefox.cpp
+SOURCES += Package/Mozilla/thunderbird.cpp
 
-HEADERS  += dialog.h \
-    installer.h \
-    Installer/nsis.h \
-    package.h \
-    Package/flashplayerplugin.h \
-    Package/flashplayeractivex.h \
-    downloader.h \
-    application.h \
-    command.h \
-    Downloader/sourceforge.h \
-    version.h \
-    Package/vlcmediaplayer.h \
-    Package/adobereader.h \
-    Package/libreoffice.h \
-    Package/Mozilla/mozilla.h \
-    Package/Mozilla/thunderbird.h \
-    Package/Mozilla/firefox.h \
-    Package/ocsinventoryngagent.h \
-    manualdownload.h \
-    Package/infrarecorder.h \
-    Package/javaruntimeenvironment8.h \
-    Package/telegramdesktop.h
+HEADERS += application.h
+HEADERS += command.h
+HEADERS += dialog.h
+HEADERS += downloader.h
+HEADERS += package.h
+HEADERS += installer.h
+HEADERS += manualdownload.h
+HEADERS += version.h
+HEADERS += Downloader/sourceforge.h
+HEADERS += Installer/nsis.h
+HEADERS += Package/adobereader.h
+HEADERS += Package/flashplayeractivex.h
+HEADERS += Package/flashplayerplugin.h
+HEADERS += Package/infrarecorder.h
+HEADERS += Package/javaruntimeenvironment8.h
+HEADERS += Package/libreoffice.h
+HEADERS += Package/ocsinventoryngagent.h
+HEADERS += Package/telegramdesktop.h
+HEADERS += Package/vlcmediaplayer.h
+HEADERS += Package/Mozilla/mozilla.h
+HEADERS += Package/Mozilla/thunderbird.h
+HEADERS += Package/Mozilla/firefox.h
 
-FORMS    += dialog.ui \
-    command.ui \
-    manualdownload.ui
+FORMS += command.ui
+FORMS += dialog.ui
+FORMS += manualdownload.ui
 
-OTHER_FILES += \
-    NSIS/main.nsi \
-    NSIS/FlashPlayerActiveX/main.nsh \
-    NSIS/FlashPlayerPlugin/main.nsh \
-    InstallerJukebox.ini \
-    InstallerJukebox.template.ini \
-    README.txt \
-    NSIS/VlcMediaPlayer/main.nsh \
-    NSIS/VlcMediaPlayer/blockOnIE.nsh \
-    NSIS/AdobeReader/main.nsh \
-    NSIS/LibreOffice/main.nsh \
-    NSIS/LibreOffice/configtemplate.nsh \
-    NSIS/Thunderbird/main.nsh \
-    NSIS/Thunderbird/deleteprefs.nsh \
-    NSIS/Thunderbird/writeprefs.nsh \
-    NSIS/Mozilla/local-settings.js \
-    NSIS/Thunderbird/uninstalltestpilot.nsh \
-    NSIS/Thunderbird/accountconfig.nsh \
-    NSIS/Firefox/main.nsh \
-    NSIS/Firefox/deleteprefs.nsh \
-    NSIS/Firefox/writeprefs.nsh \
-    NSIS/OcsInventoryNgAgent/main.nsh \
-    NSIS/OcsInventoryNgAgent/installcert.nsh \
-    NSIS/JavaRuntimeEnvironment8/main.nsh \
-    NSIS/JavaRuntimeEnvironment8/disableautoupdate.nsh \
-    NSIS/JavaRuntimeEnvironment8/uninstallpreviousversions.nsh \
-    NSIS/OcsInventoryNgAgent/installplugin.nsh \
-    NSIS/InfraRecorder/main.nsh \
-    NSIS/InfraRecorder/header.nsh \
-    NSIS/InfraRecorder/setversion.nsh
+OTHER_FILES += InstallerJukebox.ini
+OTHER_FILES += InstallerJukebox.template.ini
+OTHER_FILES += README.txt
+OTHER_FILES += NSIS/main.nsi
+OTHER_FILES += NSIS/AdobeReader/main.nsh
+OTHER_FILES += NSIS/Firefox/main.nsh
+OTHER_FILES += NSIS/Firefox/deleteprefs.nsh
+OTHER_FILES += NSIS/Firefox/writeprefs.nsh
+OTHER_FILES += NSIS/FlashPlayerActiveX/main.nsh
+OTHER_FILES += NSIS/FlashPlayerPlugin/main.nsh
+OTHER_FILES += NSIS/InfraRecorder/main.nsh
+OTHER_FILES += NSIS/InfraRecorder/header.nsh
+OTHER_FILES += NSIS/InfraRecorder/setversion.nsh
+OTHER_FILES += NSIS/JavaRuntimeEnvironment8/main.nsh
+OTHER_FILES += NSIS/JavaRuntimeEnvironment8/disableautoupdate.nsh
+OTHER_FILES += NSIS/JavaRuntimeEnvironment8/uninstallpreviousversions.nsh
+OTHER_FILES += NSIS/LibreOffice/main.nsh
+OTHER_FILES += NSIS/LibreOffice/configtemplate.nsh
+OTHER_FILES += NSIS/Mozilla/local-settings.js
+OTHER_FILES += NSIS/OcsInventoryNgAgent/main.nsh
+OTHER_FILES += NSIS/OcsInventoryNgAgent/installcert.nsh
+OTHER_FILES += NSIS/OcsInventoryNgAgent/installplugin.nsh
+OTHER_FILES += NSIS/Thunderbird/main.nsh
+OTHER_FILES += NSIS/Thunderbird/accountconfig.nsh
+OTHER_FILES += NSIS/Thunderbird/deleteprefs.nsh
+OTHER_FILES += NSIS/Thunderbird/writeprefs.nsh
+OTHER_FILES += NSIS/Thunderbird/uninstalltestpilot.nsh
+OTHER_FILES += NSIS/VlcMediaPlayer/main.nsh
+OTHER_FILES += NSIS/VlcMediaPlayer/blockOnIE.nsh
+OTHER_FILES += NSIS/VlcMediaPlayer/uninstallActiveXPlugin.nsh \
+OTHER_FILES += NSIS/VlcMediaPlayer/uninstallMozillaPlugin.nsh
 
-RESOURCES += \
-    NSIS/nsis.qrc
-
-DISTFILES += \
-    NSIS/VlcMediaPlayer/uninstallActiveXPlugin.nsh \
-    NSIS/VlcMediaPlayer/uninstallMozillaPlugin.nsh
+RESOURCES += NSIS/nsis.qrc
