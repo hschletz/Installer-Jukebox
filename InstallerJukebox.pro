@@ -82,6 +82,7 @@ OTHER_FILES += NSIS/Mozilla/local-settings.js
 OTHER_FILES += NSIS/OcsInventoryNgAgent/main.nsh
 OTHER_FILES += NSIS/OcsInventoryNgAgent/installcert.nsh
 OTHER_FILES += NSIS/OcsInventoryNgAgent/installplugin.nsh
+OTHER_FILES += NSIS/TelegramDesktop/main.nsh
 OTHER_FILES += NSIS/Thunderbird/main.nsh
 OTHER_FILES += NSIS/Thunderbird/accountconfig.nsh
 OTHER_FILES += NSIS/Thunderbird/deleteprefs.nsh
