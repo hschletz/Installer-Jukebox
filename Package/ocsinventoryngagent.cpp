@@ -33,7 +33,7 @@
 #include "ocsinventoryngagent.h"
 
 OcsInventoryNgAgent::OcsInventoryNgAgent() :
-    Package("OCS Inventory NG agent", "2.1.1.3")
+    Package("OCS Inventory NG agent", "2.6.0.0")
 {
 }
 
@@ -94,7 +94,7 @@ void OcsInventoryNgAgent::download(Version version)
 {
     QString archive(
                 Downloader::get(
-                    QString("https://github.com/OCSInventory-NG/WindowsAgent/releases/download/%1/OCSNG-Windows-Agent-%2.zip")
+                    QString("https://github.com/OCSInventory-NG/WindowsAgent/releases/download/%1/OCS-Windows-Agent-%2.zip")
                     .arg(version)
                     .arg(version.pad(4, "0")),
                     Application::getTmpDir()
@@ -108,7 +108,7 @@ void OcsInventoryNgAgent::download(Version version)
 
     QuaZipFile file(
                 archive,
-                QString("OCSNG-Windows-Agent-%1/OCS-NG-Windows-Agent-Setup.exe").arg(version.pad(4, "0"))
+                QString("OCS-Windows-Agent-%1/OCS-NG-Windows-Agent-Setup.exe").arg(version.pad(4, "0"))
                 );
     if (!file.open(QIODevice::ReadOnly) or file.usize() == -1) {
         Application::critical("Error opening archive!");
