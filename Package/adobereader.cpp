@@ -60,7 +60,7 @@ void AdobeReader::build(NSIS *installer, Version version)
                     getOutputFile(),
                     NSIS::None,
                     800,
-                    browsers() << "AcroRd32.exe",
+                    QStringList("AcroRd32.exe"),
                     files,
                     src,
                     ""

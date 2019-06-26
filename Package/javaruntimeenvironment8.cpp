@@ -62,7 +62,7 @@ void JavaRuntimeEnvironment8::build(NSIS *installer, Version version)
                     getOutputFile(),
                     NSIS::Zlib,
                     120,
-                    browsers(),
+                    QStringList(),
                     tempFiles,
                     src,
                     header
