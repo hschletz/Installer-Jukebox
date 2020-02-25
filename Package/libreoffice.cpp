@@ -58,6 +58,12 @@ void LibreOffice::build(NSIS *installer, Version version)
         msiOptions << QString("CREATEDESKTOPLINK=%1").arg(getConfig("Desktop shortcut", false).toBool());
         msiOptions << QString("QUICKSTART=%1").arg(getConfig("Enable Quickstarter by default", false).toBool());
 
+        bool reboot = getConfig("Reboot", false).toBool();
+        msiOptions << QString("RebootYesNo=%1").arg(reboot ? "Yes" : "No");
+        if (!reboot) {
+            msiOptions << "REBOOT=ReallySuppress";
+        }
+
         qDebug() << "MSI options:" << msiOptions;
 
         QString src(loadResource(":NSIS/LibreOffice/main.nsh"));
@@ -99,14 +105,8 @@ void LibreOffice::download(Version version)
 {
     version = version.pad(3);
 
-    QString filename;
-    if (version.part(1).toUInt() >= 4) {
-        filename = QString("LibreOffice_%1_Win_x86.msi").arg(version);
-    } else {
-        filename = QString("LibO_%1_Win_x86_install_multi.msi").arg(version);
-    }
-
-    QString url("http://download.documentfoundation.org/libreoffice/stable/%1/win/x86/%2");
+    QString filename = QString("LibreOffice_%1_Win_x64.msi").arg(version);
+    QString url("http://download.documentfoundation.org/libreoffice/stable/%1/win/x86_64/%2");
     QString target(
                 Downloader::get(url.arg(version).arg(filename),
                                 Application::getTmpDir())
