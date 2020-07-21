@@ -39,7 +39,7 @@ Mozilla::Mozilla(const char *name, const char *minVersion) :
 
 void Mozilla::download(Version version)
 {
-    QString url("https://download.mozilla.org/?product=%1-%2-SSL&os=win&lang=%3");
+    QString url("https://download.mozilla.org/?product=%1-%2-SSL&os=win64&lang=%3");
     QString target(
                 Downloader::get(
                     url

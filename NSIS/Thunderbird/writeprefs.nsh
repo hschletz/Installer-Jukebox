@@ -1,2 +1,2 @@
-    CopyFiles /SILENT "$PLUGINSDIR\mozilla.cfg" "$PROGRAMFILES32\Mozilla Thunderbird"
-    CopyFiles /SILENT "$PLUGINSDIR\local-settings.js" "$PROGRAMFILES32\Mozilla Thunderbird\defaults\pref"
+    CopyFiles /SILENT "$PLUGINSDIR\mozilla.cfg" "$PROGRAMFILES64\Mozilla Thunderbird"
+    CopyFiles /SILENT "$PLUGINSDIR\local-settings.js" "$PROGRAMFILES64\Mozilla Thunderbird\defaults\pref"

@@ -1,2 +1,2 @@
-    Delete /REBOOTOK "$PROGRAMFILES32\Mozilla Thunderbird\defaults\pref\local-settings.js"
-    Delete /REBOOTOK "$PROGRAMFILES32\Mozilla Thunderbird\mozilla.cfg"
+    Delete /REBOOTOK "$PROGRAMFILES64\Mozilla Thunderbird\defaults\pref\local-settings.js"
+    Delete /REBOOTOK "$PROGRAMFILES64\Mozilla Thunderbird\mozilla.cfg"
