@@ -33,7 +33,7 @@
 #include "ocsinventoryngagent.h"
 
 OcsInventoryNgAgent::OcsInventoryNgAgent() :
-    Package("OCS Inventory NG agent", "2.6.0.0")
+    Package("OCS Inventory NG agent", "2.8.0.0")
 {
 }
 
@@ -94,7 +94,7 @@ void OcsInventoryNgAgent::download(Version version)
 {
     QString archive(
                 Downloader::get(
-                    QString("https://github.com/OCSInventory-NG/WindowsAgent/releases/download/%1/OCS-Windows-Agent-%2.zip")
+                    QString("https://github.com/OCSInventory-NG/WindowsAgent/releases/download/%1/OCS-Windows-Agent-%2_x64.zip")
                     .arg(version)
                     .arg(version.pad(4, "0")),
                     Application::getTmpDir()
@@ -108,7 +108,7 @@ void OcsInventoryNgAgent::download(Version version)
 
     QuaZipFile file(
                 archive,
-                QString("OCS-Windows-Agent-%1/OCS-NG-Windows-Agent-Setup.exe").arg(version.pad(4, "0"))
+                QString("OCS-Windows-Agent-%1_x64/OCS-Windows-Agent-Setup-x64.exe").arg(version.pad(4, "0"))
                 );
     if (!file.open(QIODevice::ReadOnly) or file.usize() == -1) {
         Application::critical("Error opening archive!");
@@ -117,7 +117,7 @@ void OcsInventoryNgAgent::download(Version version)
     }
     qDebug() << "Archive opened.";
 
-    originalInstaller = Application::getTmpDir() + "/OCS-NG-Windows-Agent-Setup.exe";
+    originalInstaller = Application::getTmpDir() + "/OCS-NG-Windows-Agent-Setup-x64.exe";
     QFile target(originalInstaller);
     if (!target.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         Application::critical("Error opening target file!");
